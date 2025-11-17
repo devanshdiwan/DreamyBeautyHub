@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="monetag" content="4bb16d0d11c2c41b7430db4e0a3f0e75">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DreamyBeautyHub</title>
+    <link rel="icon" href="https://i.ibb.co/C573fCwc/dreamybeautyhublogo.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -15,7 +17,7 @@
             --primary-color: #E6A4B4;
             --card-bg: #FFFFFF;
             --shadow: 0 6px 20px rgba(178, 131, 154, 0.08);
-            --shadow-hover: 0 12px 28px rgba(178, 131, 154, 0.15);
+            --shadow-hover: 0 12px 28px rgba(178, 131, 154, 0.2);
             --border-radius: 16px;
             --border-color: #F3E5E3;
             --font-body: 'Montserrat', sans-serif;
@@ -63,9 +65,17 @@
              justify-content: space-between;
              align-items: center;
         }
+        .logo a {
+            display: block;
+        }
         .logo img {
             height: 50px;
             width: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .logo a:hover img {
+            transform: scale(1.05);
         }
         .hero {
             text-align: center;
@@ -172,17 +182,35 @@
             position: absolute;
             bottom: 0;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) scaleX(0);
+            transform-origin: center;
             width: 80px;
             height: 3px;
             background-color: var(--primary-color);
             border-radius: 2px;
+            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        main:not(.loading) #page-title::after {
+            transform: translateX(-50%) scaleX(1);
         }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 30px;
+        }
+
+        /* Pinterest-style Masonry Layout for Items */
+        .items-masonry-grid {
+            display: block;
+            column-count: 4;
+            column-gap: 30px;
+        }
+        .items-masonry-grid .card {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 30px;
+            break-inside: avoid;
         }
 
         .card {
@@ -206,8 +234,8 @@
             }
         }
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 28px rgba(230, 164, 180, 0.2);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
         }
         .card-image {
             height: 220px;
@@ -348,10 +376,11 @@
         }
         .footer-social a {
             color: var(--text-color);
-            transition: color 0.3s;
+            transition: color 0.3s, transform 0.3s;
         }
         .footer-social a:hover {
             color: var(--heading-color);
+            transform: translateY(-3px);
         }
         .footer-social svg {
             width: 24px; height: 24px;
@@ -425,10 +454,11 @@
         }
         #social-links-menu a {
             color: var(--text-light);
-            transition: color 0.3s;
+            transition: color 0.3s, transform 0.3s;
         }
         #social-links-menu a:hover {
             color: var(--heading-color);
+            transform: scale(1.1);
         }
         #social-links-menu a svg {
             width: 24px;
@@ -451,20 +481,33 @@
             visibility: visible;
         }
 
+        @media (max-width: 1200px) {
+            .items-masonry-grid {
+                column-count: 3;
+            }
+        }
+        @media (max-width: 992px) {
+             .items-masonry-grid {
+                column-count: 3;
+            }
+        }
         @media (max-width: 768px) {
             .logo img { height: 40px; }
             #hero-title { font-size: 2.5rem; }
             #hero-tagline { font-size: 1rem; }
             #page-title { font-size: 2.2rem; }
             .grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+            .items-masonry-grid {
+                column-count: 2;
+            }
         }
         @media (max-width: 576px) {
-             .grid {
-                grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
-             }
              .grid.category-grid {
                  grid-template-columns: 1fr;
              }
+             .items-masonry-grid {
+                column-count: 1;
+            }
         }
     </style>
 </head>
@@ -472,7 +515,9 @@
     <header id="header">
         <div class="header-content">
             <div class="logo">
-                <img src="https://i.ibb.co/C573fCwc/dreamybeautyhublogo.png" alt="dreamybeautyhublogo">
+                <a href="/" aria-label="Homepage">
+                    <img src="https://i.ibb.co/C573fCwc/dreamybeautyhublogo.png" alt="dreamybeautyhublogo">
+                </a>
             </div>
             <button id="menu-toggle-btn" aria-label="Open menu" style="display: none;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
@@ -516,7 +561,9 @@
     <footer>
         <div class="footer-content container">
             <div class="footer-logo">
-                <img src="https://i.ibb.co/C573fCwc/dreamybeautyhublogo.png" alt="dreamybeautyhublogo">
+                <a href="/" aria-label="Homepage">
+                    <img src="https://i.ibb.co/C573fCwc/dreamybeautyhublogo.png" alt="dreamybeautyhublogo">
+                </a>
             </div>
             <div id="footer-social-links" class="footer-social"></div>
             <p class="footer-copyright">&copy; 2024 <span id="site-title-footer">DreamyBeautyHub</span> &middot; Powered by Firebase</p>
@@ -783,7 +830,7 @@
         async function fetchItems(categoryId, categoryName) {
             currentView = 'items';
             currentCategoryId = categoryId;
-            contentGrid.className = 'grid';
+            contentGrid.className = 'items-masonry-grid';
             showLoader();
             pageTitle.textContent = categoryName;
             backButton.classList.add('visible');
