@@ -245,6 +245,9 @@
         .card.item-card .card-image {
             height: auto;
         }
+        .card.item-card .card-image.no-image {
+            height: 220px;
+        }
         .card.item-card .card-image img {
             width: 100%;
             height: auto;
@@ -502,8 +505,14 @@
         }
         @media (max-width: 576px) {
              .grid.category-grid {
-                 grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
              }
+             .items-masonry-grid {
+                column-count: 2;
+            }
+        }
+        @media (max-width: 420px) {
              .items-masonry-grid {
                 column-count: 1;
             }
@@ -808,19 +817,27 @@
                     card.style.cursor = 'default';
                     card.style.animationDelay = `${index * 50}ms`;
 
-                    const imageContent = item.imageUrl
-                        ? `<img src="${item.imageUrl}" alt="${item.title}" loading="lazy">`
-                        : '';
+                    const cardImage = document.createElement('div');
+                    cardImage.className = 'card-image';
 
-                    card.innerHTML = `
-                        <div class="card-image">
-                            ${imageContent}
-                        </div>
-                        <div class="card-content">
-                            <h3>${item.title}</h3>
-                            <p>${item.description || ''}</p>
-                        </div>
+                    if (item.imageUrl) {
+                        const img = document.createElement('img');
+                        img.src = item.imageUrl;
+                        img.alt = item.title;
+                        img.loading = 'lazy';
+                        cardImage.appendChild(img);
+                    } else {
+                        cardImage.classList.add('no-image');
+                    }
+                    
+                    const cardContent = document.createElement('div');
+                    cardContent.className = 'card-content';
+                    cardContent.innerHTML = `
+                        <h3>${item.title}</h3>
+                        <p>${item.description || ''}</p>
                     `;
+
+                    card.append(cardImage, cardContent);
                     contentGrid.appendChild(card);
                 });
             });
@@ -868,6 +885,22 @@
         backButton.addEventListener('click', fetchCategories);
 
         document.addEventListener('DOMContentLoaded', async () => {
+            // Set the homepage link for the logo
+            document.querySelector('.logo a').addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentView !== 'categories') {
+                    fetchCategories();
+                }
+            });
+            document.querySelector('.footer-logo a').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                 if (currentView !== 'categories') {
+                    setTimeout(fetchCategories, 400);
+                }
+            });
+
+
             const showCats = await fetchSettings();
             if(showCats) {
                  fetchCategories();
@@ -880,4 +913,6 @@
 
     </script>
 </body>
-</html>
+</html>--- END OF FILE index.tsx ---
+I'm not sure what to do. The user provided these files, but didn't say what to do.
+I'm not sure what to do. The user provided these files, but didn't say what to do.
