@@ -1,918 +1,1320 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DreamyBeautyHub</title>
-    <link rel="icon" href="https://i.ibb.co/C573fCwc/dreamybeautyhublogo.png" type="image/png">
+    <title>DreamyBeautyHub | Dreamy Nail Designs & Inspiration</title>
+    <meta name="description"
+        content="Discover stunning nail art designs, trends, and inspiration for every season and occasion.">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        :root {
-            --bg-color: #FDF8F5;
-            --text-color: #5C5470;
-            --heading-color: #B2839A;
-            --primary-color: #E6A4B4;
-            --card-bg: #FFFFFF;
-            --shadow: 0 6px 20px rgba(178, 131, 154, 0.08);
-            --shadow-hover: 0 12px 28px rgba(178, 131, 154, 0.2);
-            --border-radius: 16px;
-            --border-color: #F3E5E3;
-            --font-body: 'Montserrat', sans-serif;
-            --font-heading: 'Playfair Display', serif;
-        }
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
+
+        :root {
+            --rose: #E8A0BF;
+            --rose-dark: #D488A3;
+            --rose-light: #F3D1DC;
+            --cream: #FFF8F3;
+            --white: #FFFFFF;
+            --charcoal: #2D2D2D;
+            --gray: #6B6B6B;
+            --gold: #D4AF37;
+        }
+
         html {
             scroll-behavior: smooth;
         }
+
         body {
-            font-family: var(--font-body);
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            color: var(--charcoal);
+            background: var(--cream);
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        header {
-            padding: 15px 0;
-            border-bottom: 1px solid var(--border-color);
-            background-color: rgba(253, 248, 245, 0.8);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            transition: box-shadow 0.3s ease;
-        }
-        header.scrolled {
-            box-shadow: 0 4px 15px rgba(178, 131, 154, 0.05);
-        }
-        .header-content {
-             max-width: 1200px;
-             margin: 0 auto;
-             padding: 0 20px;
-             display: flex;
-             justify-content: space-between;
-             align-items: center;
-        }
-        .logo a {
-            display: block;
-        }
-        .logo img {
-            height: 50px;
-            width: auto;
-            display: block;
-            transition: transform 0.3s ease;
-        }
-        .logo a:hover img {
-            transform: scale(1.05);
-        }
-        .hero {
-            text-align: center;
-            padding: 100px 20px;
-            margin-top: 20px;
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, rgba(255, 249, 246, 0.7), rgba(253, 248, 245, 0.7)), url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23E6A4B4' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-        }
-        #hero-title {
-            font-family: var(--font-heading);
-            color: var(--heading-color);
-            font-size: 3.5rem;
-            margin-bottom: 15px;
-            animation: fadeInDown 0.8s ease-out;
-        }
-        #hero-tagline {
-            font-size: 1.2rem;
-            color: var(--text-color);
-            opacity: 0.8;
-            max-width: 600px;
-            margin: 0 auto 30px;
-            animation: fadeInUp 0.8s ease-out 0.2s;
-            animation-fill-mode: both;
-        }
-        .hero-cta {
-            padding: 14px 32px;
-            border: none;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            font-family: var(--font-body);
-            font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(230, 164, 180, 0.3);
-            animation: fadeInUp 0.8s ease-out 0.4s;
-            animation-fill-mode: both;
-        }
-        .hero-cta:hover {
-            background-color: #d68fa3; /* primary-dark */
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(230, 164, 180, 0.4);
-        }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        #search-container {
-            margin: 30px 0;
-            position: relative;
-        }
-         #search-container::before {
-            content: '';
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23C3B1B1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E");
-            background-size: contain;
-            opacity: 0.8;
-        }
-        #search-input {
-            width: 100%;
-            padding: 15px 20px 15px 50px;
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-            font-size: 1rem;
-            font-family: var(--font-body);
-            transition: all 0.3s ease;
-            background-color: var(--card-bg);
-        }
-        #search-input::placeholder { color: #C3B1B1; }
-        #search-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(230, 164, 180, 0.2);
-        }
-        main {
-            padding: 20px 0;
-            transition: opacity 0.4s ease;
-        }
-        main.loading { opacity: 0; }
-        #page-title {
-            font-family: var(--font-heading);
-            color: var(--heading-color);
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 2.8rem;
-            position: relative;
-            padding-bottom: 15px;
-        }
-        #page-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%) scaleX(0);
-            transform-origin: center;
-            width: 80px;
-            height: 3px;
-            background-color: var(--primary-color);
-            border-radius: 2px;
-            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-        main:not(.loading) #page-title::after {
-            transform: translateX(-50%) scaleX(1);
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        /* Pinterest-style Masonry Layout for Items */
-        .items-masonry-grid {
-            display: block;
-            column-count: 4;
-            column-gap: 30px;
-        }
-        .items-masonry-grid .card {
-            display: inline-block;
-            width: 100%;
-            margin-bottom: 30px;
-            break-inside: avoid;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid var(--border-color);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: cardFadeIn 0.5s ease forwards;
-        }
-        .card:not(.item-card) {
-             cursor: pointer;
-        }
-        @keyframes cardFadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-hover);
-        }
-        .card-image {
-            height: 220px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-        .card.item-card .card-image {
-            height: auto;
-        }
-        .card.item-card .card-image.no-image {
-            height: 220px;
-        }
-        .card.item-card .card-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: var(--border-radius) var(--border-radius) 0 0;
-        }
-        .card-image.no-image {
-             background: linear-gradient(135deg, #FFF9F6, #FDF8F5), url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23E6A4B4' fill-opacity='0.1' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
-        }
-        .card-content {
-            padding: 25px;
-        }
-        .card-content h3 {
-            font-family: var(--font-body);
-            color: #111;
-            font-weight: 700;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-            line-height: 1.4;
-        }
-        .card-content p {
-            font-size: 0.9rem;
-            color: #555;
-            opacity: 1;
-        }
-        #back-button {
-            border: none;
-            background: none;
-            padding: 12px 24px;
-            border: 1px solid var(--border-color);
-            background-color: var(--card-bg);
-            box-shadow: var(--shadow);
-            color: var(--primary-color);
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            margin-bottom: 20px;
-            font-family: var(--font-body);
-            font-size: 1rem;
-            font-weight: 600;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.4s ease;
-        }
-        #back-button.visible {
-             opacity: 1;
-             visibility: visible;
-             transform: translateY(0);
-        }
-        #back-button:hover {
-            background-color: #FBEFF2;
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-            color: var(--heading-color);
-        }
-        .loader, .message {
-            text-align: center;
-            margin-top: 60px;
-            font-size: 1.2rem;
-            color: #B2A1A1;
-        }
-        .skeleton-loader .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        .skeleton-card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-        }
-        .skeleton-image {
-            height: 220px;
-            background-color: #f0f0f0;
-        }
-        .skeleton-text {
-            height: 20px;
-            background-color: #f0f0f0;
-            border-radius: 8px;
-            margin: 25px 25px 10px;
-        }
-        .skeleton-text.short {
-            width: 60%;
-            height: 16px;
-             margin: 0 25px 25px;
-        }
-        .shimmer {
-            position: relative;
-            overflow: hidden;
-        }
-        .shimmer::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            transform: translateX(-100%);
-            background: linear-gradient(90deg, rgba(255,255,255,0) 0, rgba(255,255,255,0.2) 20%, rgba(255,255,255,0.5) 60%, rgba(255,255,255,0));
-            animation: shimmer 2s infinite;
-        }
-        @keyframes shimmer {
-            100% {
-                transform: translateX(100%);
-            }
-        }
-
-        footer {
-            padding: 50px 0;
-            margin-top: 50px;
-            background-color: #FFF9F6;
-            border-top: 1px solid var(--border-color);
-        }
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-        .footer-logo img {
-            height: 50px;
-            opacity: 0.8;
-        }
-        .footer-social {
-            display: flex;
-            gap: 20px;
-        }
-        .footer-social a {
-            color: var(--text-color);
-            transition: color 0.3s, transform 0.3s;
-        }
-        .footer-social a:hover {
-            color: var(--heading-color);
-            transform: translateY(-3px);
-        }
-        .footer-social svg {
-            width: 24px; height: 24px;
-        }
-        .footer-copyright {
-            color: #C3B1B1;
-            font-size: 0.9rem;
-            margin-top: 10px;
-        }
-
-        /* Menu Styles */
-        #menu-toggle-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        #menu-toggle-btn svg {
-            width: 28px;
-            height: 28px;
-            color: var(--heading-color);
-        }
-        .sidenav {
-            height: 100%;
-            width: 280px;
-            position: fixed;
-            z-index: 1001;
-            top: 0;
-            right: -300px;
-            background-color: var(--card-bg);
             overflow-x: hidden;
-            transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            padding: 60px 20px 20px 20px;
-            box-shadow: -10px 0 30px rgba(0,0,0,0.08);
         }
-        .sidenav.open {
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
             right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(232, 160, 191, 0.2);
+            transition: all 0.3s ease;
         }
-        .sidenav .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 25px;
-            font-size: 36px;
-            text-decoration: none;
-            color: var(--text-color);
+
+        .header.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
-        #menu-links a {
-            padding: 10px 15px;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--text-color);
-            display: block;
-            transition: 0.3s;
-            border-radius: 8px;
-        }
-        #menu-links a:hover {
-            background-color: #FBEFF2;
-            color: var(--heading-color);
-        }
-        #social-links-menu {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 90px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
             gap: 15px;
+            text-decoration: none;
+            color: var(--charcoal);
+        }
+
+        .logo img {
+            height: 55px;
+        }
+
+        .logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--rose);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--rose-dark);
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .search-icon {
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: var(--charcoal);
+            transition: color 0.3s;
+        }
+
+        .search-icon:hover {
+            color: var(--rose-dark);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
             justify-content: center;
+            text-align: center;
+            padding: 140px 40px 80px;
+            background: linear-gradient(135deg, #FFF8F3 0%, #FFFFFF 50%, #FFF0F5 100%);
+            position: relative;
         }
-        #social-links-menu a {
-            color: var(--text-light);
-            transition: color 0.3s, transform 0.3s;
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(232, 160, 191, 0.1) 0%, transparent 70%);
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: float 6s ease-in-out infinite;
         }
-        #social-links-menu a:hover {
-            color: var(--heading-color);
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(-20px);
+            }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 10px 24px;
+            background: var(--white);
+            border: 1px solid var(--rose-light);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--rose-dark);
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: 6rem;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            color: var(--charcoal);
+        }
+
+        .hero-highlight {
+            background: linear-gradient(135deg, var(--rose) 0%, var(--rose-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--gray);
+            margin-bottom: 50px;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 45px;
+            background: linear-gradient(135deg, var(--rose) 0%, var(--rose-dark) 100%);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.4s;
+            box-shadow: 0 10px 30px rgba(232, 160, 191, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(232, 160, 191, 0.4);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Section */
+        .section {
+            padding: 120px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--white);
+            border: 1px solid var(--rose-light);
+            border-radius: 30px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--rose-dark);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 4rem;
+            color: var(--charcoal);
+            margin-bottom: 20px;
+        }
+
+        .section-desc {
+            font-size: 1.15rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Categories */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .category-card {
+            position: relative;
+            height: 450px;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
+            z-index: 1;
+            transition: all 0.5s;
+        }
+
+        .category-card:hover::before {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s;
+        }
+
+        .category-card:hover .category-image {
             transform: scale(1.1);
         }
-        #social-links-menu a svg {
-            width: 24px;
-            height: 24px;
-        }
-        #sidenav-overlay {
-            position: fixed;
-            top: 0;
+
+        .category-info {
+            position: absolute;
+            bottom: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.3);
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s, visibility 0.4s;
-        }
-        #sidenav-overlay.visible {
-            opacity: 1;
-            visibility: visible;
+            right: 0;
+            padding: 35px;
+            z-index: 2;
+            color: var(--white);
         }
 
-        @media (max-width: 1200px) {
-            .items-masonry-grid {
-                column-count: 3;
+        .category-name {
+            font-size: 2.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 8px;
+        }
+
+        .category-count {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Posts Grid */
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 40px;
+        }
+
+        .post-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .post-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .post-image-container {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .post-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .post-card:hover .post-image {
+            transform: scale(1.08);
+        }
+
+        .post-body {
+            padding: 35px;
+        }
+
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--rose-dark);
+            font-weight: 600;
+        }
+
+        .post-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--charcoal);
+            line-height: 1.3;
+        }
+
+        .post-excerpt {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 25px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .read-more {
+            color: var(--rose-dark);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s;
+        }
+
+        .post-card:hover .read-more {
+            gap: 12px;
+        }
+
+        /* Ad Banner */
+        .ad-banner {
+            width: 320px;
+            height: 50px;
+            margin: 40px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .ad-banner-grid {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        /* Single Post */
+        .single-post {
+            display: none;
+            padding: 140px 0 100px;
+        }
+
+        .post-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 24px;
+            padding: 70px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.08);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--charcoal);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 40px;
+            padding: 12px 28px;
+            background: var(--cream);
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            background: var(--rose-light);
+            color: var(--rose-dark);
+            transform: translateX(-5px);
+        }
+
+        .post-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .post-header h1 {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+
+        .post-meta-large {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        .post-featured-img {
+            width: 100%;
+            height: 550px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 50px;
+        }
+
+        .post-content {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--charcoal);
+        }
+
+        .post-content p {
+            margin-bottom: 25px;
+        }
+
+        .post-content img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin: 35px 0;
+        }
+
+        /* Category View */
+        .category-view {
+            display: none;
+            padding: 140px 0 100px;
+        }
+
+        /* Search Overlay */
+        .search-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.98);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .search-overlay.active {
+            display: flex;
+        }
+
+        .close-search {
+            position: absolute;
+            top: 50px;
+            right: 50px;
+            font-size: 3rem;
+            cursor: pointer;
+            color: var(--gray);
+            transition: all 0.3s;
+        }
+
+        .close-search:hover {
+            color: var(--rose-dark);
+            transform: rotate(90deg);
+        }
+
+        .search-container {
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 25px 0;
+            font-size: 3rem;
+            border: none;
+            border-bottom: 3px solid var(--rose-light);
+            background: transparent;
+            font-family: 'Cormorant Garamond', serif;
+            outline: none;
+            text-align: center;
+            color: var(--charcoal);
+        }
+
+        .search-input:focus {
+            border-color: var(--rose);
+        }
+
+        .search-results {
+            margin-top: 80px;
+            max-width: 1400px;
+            padding: 0 40px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--white);
+            padding: 100px 0 40px;
+            border-top: 1px solid rgba(232, 160, 191, 0.2);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--charcoal);
+        }
+
+        .footer-col p {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--rose-dark);
+            padding-left: 8px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--rose-dark);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background: var(--rose);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(232, 160, 191, 0.2);
+            color: var(--gray);
+        }
+
+        /* Loader */
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--rose-light);
+            border-top-color: var(--rose);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 60px auto;
+            display: none;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
             }
         }
-        @media (max-width: 992px) {
-             .items-masonry-grid {
-                column-count: 3;
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 4.5rem;
+            }
+
+            .section-title {
+                font-size: 3rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
+
         @media (max-width: 768px) {
-            .logo img { height: 40px; }
-            #hero-title { font-size: 2.5rem; }
-            #hero-tagline { font-size: 1rem; }
-            #page-title { font-size: 2.2rem; }
-            .grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
-            .items-masonry-grid {
-                column-count: 2;
+            .nav-links {
+                display: none;
             }
-        }
-        @media (max-width: 576px) {
-             .grid.category-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-             }
-             .items-masonry-grid {
-                column-count: 2;
+
+            .hero h1 {
+                font-size: 3.5rem;
             }
-        }
-        @media (max-width: 420px) {
-             .items-masonry-grid {
-                column-count: 1;
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .categories-grid,
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .post-wrapper {
+                padding: 40px 30px;
+            }
+
+            .post-header h1 {
+                font-size: 2.8rem;
             }
         }
     </style>
 </head>
+
 <body>
-    <header id="header">
-        <div class="header-content">
-            <div class="logo">
-                <a href="/" aria-label="Homepage">
-                    <img src="https://i.ibb.co/C573fCwc/dreamybeautyhublogo.png" alt="dreamybeautyhublogo">
-                </a>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <a href="#" class="logo" onclick="app.showHome()">
+                <img src="logo.png" alt="DreamyBeautyHub">
+                <span class="logo-text">DreamyBeautyHub</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#" onclick="app.showHome()">Home</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#latest">Latest</a></li>
+                <li><a href="#featured">Featured</a></li>
+            </ul>
+            <div class="search-icon" onclick="app.toggleSearch()">
+                <i class="fas fa-search"></i>
             </div>
-            <button id="menu-toggle-btn" aria-label="Open menu" style="display: none;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </button>
-        </div>
+        </nav>
     </header>
 
-    <div id="sidenav" class="sidenav">
-        <a href="javascript:void(0)" class="close-btn" id="menu-close-btn">&times;</a>
-        <div id="menu-links"></div>
-        <div id="social-links-menu"></div>
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="close-search" onclick="app.toggleSearch()">&times;</div>
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search designs..."
+                onkeyup="app.handleSearch(event)">
+        </div>
+        <div class="search-results" id="searchResults"></div>
     </div>
-    <div id="sidenav-overlay"></div>
 
-    <div class="container">
-        <div class="hero">
-            <h1 id="hero-title"></h1>
-            <p id="hero-tagline"></p>
-            <button id="hero-cta" class="hero-cta">Explore Collection</button>
+    <!-- Main Content -->
+    <main id="mainContent">
+        <!-- Home View -->
+        <div id="homeView">
+            <!-- Hero -->
+            <section class="hero">
+                <div class="hero-content">
+                    <span class="hero-tag">Nail Art Inspiration</span>
+                    <h1>Your <span class="hero-highlight">Perfect Nails</span><br>Start Here</h1>
+                    <p>Explore thousands of stunning nail designs, from elegant classics to bold statements. Find
+                        inspiration for every season, style, and occasion.</p>
+                    <a href="#categories" class="cta-button">
+                        Explore Designs <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Categories -->
+            <section class="section" id="categories">
+                <div class="container">
+                    <div class="section-header">
+                        <span class="section-tag">Browse by Style</span>
+                        <h2 class="section-title">Design Categories</h2>
+                        <p class="section-desc">From seasonal trends to timeless classics, discover nail art for every
+                            mood and moment</p>
+                    </div>
+                    <div class="categories-grid" id="categoriesGrid">
+                        <!-- Categories loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured -->
+            <section class="section" id="featured" style="background: var(--white);">
+                <div class="container">
+                    <div class="section-header">
+                        <span class="section-tag">Editor's Choice</span>
+                        <h2 class="section-title">Featured Designs</h2>
+                        <p class="section-desc">Hand-picked nail art that's trending right now</p>
+                    </div>
+                    <div class="posts-grid" id="featuredGrid">
+                        <!-- Featured posts loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Latest -->
+            <section class="section" id="latest">
+                <div class="container">
+                    <div class="section-header">
+                        <span class="section-tag">Just Added</span>
+                        <h2 class="section-title">Latest Designs</h2>
+                        <p class="section-desc">Fresh nail art ideas and inspiration</p>
+                    </div>
+                    <div class="posts-grid" id="latestGrid">
+                        <!-- Latest posts loaded here -->
+                    </div>
+                    <div class="loader" id="loader"></div>
+                </div>
+            </section>
         </div>
 
-        <div id="search-container">
-            <input type="text" id="search-input" placeholder="Search for categories or items...">
-        </div>
-
-        <main id="main-content">
-            <button id="back-button">&larr; Back to Categories</button>
-            <h2 id="page-title">Our Categories</h2>
-            <div id="content-loader" class="loader skeleton-loader">
-                <div class="grid">
-                    <div class="skeleton-card"><div class="skeleton-image shimmer"></div><div class="skeleton-text shimmer"></div><div class="skeleton-text short shimmer"></div></div>
-                    <div class="skeleton-card"><div class="skeleton-image shimmer"></div><div class="skeleton-text shimmer"></div><div class="skeleton-text short shimmer"></div></div>
-                    <div class="skeleton-card"><div class="skeleton-image shimmer"></div><div class="skeleton-text shimmer"></div><div class="skeleton-text short shimmer"></div></div>
+        <!-- Single Post View -->
+        <div class="single-post" id="singlePost">
+            <div class="container">
+                <div class="post-wrapper">
+                    <a href="#" class="back-link" onclick="app.showHome()">
+                        <i class="fas fa-arrow-left"></i> Back to Gallery
+                    </a>
+                    <article>
+                        <div class="post-header">
+                            <div class="post-meta-large" id="postMeta">
+                                <span id="postCategory"></span>
+                                <span>•</span>
+                                <span id="postDate"></span>
+                            </div>
+                            <h1 id="postTitle"></h1>
+                        </div>
+                        <img src="" alt="" id="postImage" class="post-featured-img">
+                        <div class="post-content" id="postBody"></div>
+                    </article>
                 </div>
             </div>
-            <div id="content-grid" class="grid"></div>
-            <div id="message-display" class="message" style="display: none;"></div>
-        </main>
-    </div>
+        </div>
 
-    <footer>
-        <div class="footer-content container">
-            <div class="footer-logo">
-                <a href="/" aria-label="Homepage">
-                    <img src="https://i.ibb.co/C573fCwc/dreamybeautyhublogo.png" alt="dreamybeautyhublogo">
+        <!-- Category View -->
+        <div class="category-view" id="categoryView">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Category</span>
+                    <h2 class="section-title" id="categoryTitle"></h2>
+                </div>
+                <div class="posts-grid" id="categoryPostsGrid"></div>
+                <a href="#" class="back-link" onclick="app.showHome()" style="margin-top: 60px;">
+                    <i class="fas fa-arrow-left"></i> Back to Home
                 </a>
             </div>
-            <div id="footer-social-links" class="footer-social"></div>
-            <p class="footer-copyright">&copy; 2024 <span id="site-title-footer">DreamyBeautyHub</span> &middot; Powered by Firebase</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 25px;">
+                        <img src="logo.png" alt="DreamyBeautyHub">
+                    </div>
+                    <p>Your ultimate destination for nail art inspiration. Discover beautiful designs, seasonal trends,
+                        and creative ideas for your next manicure.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="app.showHome()">Home</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#latest">Latest</a></li>
+                        <li><a href="#featured">Featured</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Categories</h3>
+                    <ul class="footer-links" id="footerCategories">
+                        <!-- Categories loaded here -->
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>About</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 DreamyBeautyHub. All rights reserved.
+            </div>
         </div>
     </footer>
 
-
+    <!-- Firebase -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-        import { getFirestore, collection, getDocs, doc, getDoc, query, where } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, where, orderBy, limit, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyApYYIEiyvpNGO9m1g7JBA3e4Q6x1CSrMM",
             authDomain: "dreamybeautyhub-b0500.firebaseapp.com",
+            databaseURL: "https://dreamybeautyhub-b0500-default-rtdb.firebaseio.com",
             projectId: "dreamybeautyhub-b0500",
-            storageBucket: "dreamybeautyhub-b0500.appspot.com",
+            storageBucket: "dreamybeautyhub-b0500.firebasestorage.app",
             messagingSenderId: "465258211378",
             appId: "1:465258211378:web:2635d10695b0a39970742b",
             measurementId: "G-CLQSNKV9GE"
         };
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+        const firebaseApp = initializeApp(firebaseConfig);
+        const db = getFirestore(firebaseApp);
 
-        const contentGrid = document.getElementById('content-grid');
-        const mainContent = document.getElementById('main-content');
-        const loader = document.getElementById('content-loader');
-        const messageDisplay = document.getElementById('message-display');
-        const pageTitle = document.getElementById('page-title');
-        const backButton = document.getElementById('back-button');
-        const searchInput = document.getElementById('search-input');
-        
-        let currentView = 'categories';
-        let categoriesData = [];
-        let itemsData = [];
-        let currentCategoryId = null;
-
-        // --- UI Enhancements ---
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 10) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-        document.getElementById('hero-cta').addEventListener('click', () => {
-            document.getElementById('main-content').scrollIntoView({ behavior: 'smooth' });
-        });
-
-        // --- Menu Logic ---
-        const menuToggleBtn = document.getElementById('menu-toggle-btn');
-        const menuCloseBtn = document.getElementById('menu-close-btn');
-        const sidenav = document.getElementById('sidenav');
-        const sidenavOverlay = document.getElementById('sidenav-overlay');
-
-        function openMenu() {
-            sidenav.classList.add('open');
-            sidenavOverlay.classList.add('visible');
-        }
-
-        function closeMenu() {
-            sidenav.classList.remove('open');
-            sidenavOverlay.classList.remove('visible');
-        }
-
-        menuToggleBtn.addEventListener('click', openMenu);
-        menuCloseBtn.addEventListener('click', closeMenu);
-        sidenavOverlay.addEventListener('click', closeMenu);
-
-        function generateSocialLinks(settings) {
-            let socialHTML = '';
-            if (settings.facebookUrl) {
-                socialHTML += `<a href="${settings.facebookUrl}" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>`;
-            }
-            if (settings.instagramUrl) {
-                socialHTML += `<a href="${settings.instagramUrl}" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.585-.012-4.85-.07c-3.25-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85c.148-3.227 1.669-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg></a>`;
-            }
-            if (settings.twitterUrl) {
-                socialHTML += `<a href="${settings.twitterUrl}" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616v.064c0 2.298 1.634 4.212 3.793 4.649-.65.177-1.354.23-2.06.087.622 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg></a>`;
-            }
-            return socialHTML;
-        }
-
-        function setupNavigation(settings) {
-            const menuLinksContainer = document.getElementById('menu-links');
-            const socialLinksMenuContainer = document.getElementById('social-links-menu');
-            const socialLinksFooterContainer = document.getElementById('footer-social-links');
-            
-            menuLinksContainer.innerHTML = '';
-            socialLinksMenuContainer.innerHTML = '';
-            socialLinksFooterContainer.innerHTML = '';
-
-            let hasMenuContent = false;
-
-            if (settings.showContactLink && settings.contactUrl) {
-                menuLinksContainer.innerHTML += `<a href="${settings.contactUrl}" target="_blank" rel="noopener noreferrer">Contact Us</a>`;
-                hasMenuContent = true;
-            }
-
-            if (settings.showSocialLinks) {
-                const socialHTML = generateSocialLinks(settings);
-                if (socialHTML) {
-                    socialLinksMenuContainer.innerHTML = socialHTML;
-                    socialLinksFooterContainer.innerHTML = socialHTML;
-                    hasMenuContent = true;
-                }
-            }
-            
-            menuToggleBtn.style.display = 'flex';
-            if (!hasMenuContent) {
-                menuLinksContainer.innerHTML = `<p style="padding: 10px 15px; color: var(--text-color);">Menu coming soon.</p>`;
-            }
-        }
-
-        async function fetchSettings() {
-            const heroTitle = document.getElementById('hero-title');
-            const heroTagline = document.getElementById('hero-tagline');
-            try {
-                const settingsDoc = await getDoc(doc(db, 'settings', 'global'));
-                if (settingsDoc.exists()) {
-                    const settings = settingsDoc.data();
-                    document.title = settings.siteTitle || 'DreamyBeautyHub';
-                    document.querySelector('.footer-copyright').innerHTML = `&copy; ${new Date().getFullYear()} ${settings.siteTitle || 'DreamyBeautyHub'}. All Rights Reserved.`;
-                    
-                    heroTitle.textContent = settings.siteTitle || 'DreamyBeautyHub';
-                    heroTagline.textContent = settings.tagline || 'Discover your inner glow';
-
-                    document.getElementById('search-container').style.display = settings.showSearch ? 'block' : 'none';
-                    
-                    setupNavigation(settings);
-
-                    return settings.showCategoriesOnHome;
-                }
-                 heroTitle.textContent = 'DreamyBeautyHub';
-                heroTagline.textContent = 'Discover your inner glow';
-                setupNavigation({});
-                return true;
-            } catch (error) {
-                console.error("Error fetching settings: ", error);
-                heroTitle.textContent = 'DreamyBeautyHub';
-                heroTagline.textContent = 'Welcome to our hub of beauty';
-                setupNavigation({});
-                return true;
-            }
-        }
-
-        function showLoader() {
-            loader.style.display = 'block';
-            contentGrid.innerHTML = '';
-            messageDisplay.style.display = 'none';
-        }
-
-        function hideLoader() {
-            loader.style.display = 'none';
-        }
-        
-        function showMessage(msg) {
-            messageDisplay.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="color: #ddd; margin-bottom: 1rem;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                <p>${msg}</p>
+        // Ad Banner Function
+        function createAdBanner() {
+            const adDiv = document.createElement('div');
+            adDiv.className = 'ad-banner-grid';
+            adDiv.innerHTML = `
+                <div class="ad-banner">
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key' : 'f53f3295a033bfa4a5b167657bec404f',
+                            'format' : 'iframe',
+                            'height' : 50,
+                            'width' : 320,
+                            'params' : {}
+                        };
+                    <\/script>
+                    <script type="text/javascript" src="//www.highperformanceformat.com/f53f3295a033bfa4a5b167657bec404f/invoke.js"><\/script>
+                </div>
             `;
-            messageDisplay.style.display = 'block';
-            contentGrid.innerHTML = '';
-            hideLoader();
-        }
-        
-        function fadeContent(callback) {
-            mainContent.classList.add('loading');
-            setTimeout(() => {
-                callback();
-                mainContent.classList.remove('loading');
-            }, 300);
+            return adDiv;
         }
 
-        function renderCategories(categoriesToRender) {
-             fadeContent(() => {
-                contentGrid.innerHTML = '';
-                if (categoriesToRender.length === 0) {
-                    showMessage('No categories found.');
-                    return;
-                }
-                categoriesToRender.forEach((category, index) => {
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    card.dataset.id = category.id;
-                    card.style.animationDelay = `${index * 50}ms`;
-                    
-                    const cardImage = document.createElement('div');
-                    cardImage.className = 'card-image';
-                    if (category.thumbnailUrl) {
-                        cardImage.style.backgroundImage = `url('${category.thumbnailUrl}')`;
+        class NailArtApp {
+            constructor() {
+                this.init();
+                this.setupScrollEffect();
+            }
+
+            async init() {
+                this.checkHash();
+                window.addEventListener('hashchange', () => this.checkHash());
+                await this.loadCategories();
+                await this.loadFeatured();
+                await this.loadLatest();
+            }
+
+            setupScrollEffect() {
+                window.addEventListener('scroll', () => {
+                    const header = document.getElementById('header');
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
                     } else {
-                        cardImage.classList.add('no-image');
+                        header.classList.remove('scrolled');
                     }
-                    
-                    const cardContent = document.createElement('div');
-                    cardContent.className = 'card-content';
-                    cardContent.innerHTML = `
-                        <h3>${category.name}</h3>
-                        <p>${category.description || ''}</p>
-                    `;
-
-                    card.append(cardImage, cardContent);
-                    card.addEventListener('click', () => fetchItems(category.id, category.name));
-                    contentGrid.appendChild(card);
                 });
-            });
-        }
-        
-        async function fetchCategories() {
-            currentView = 'categories';
-            currentCategoryId = null;
-            contentGrid.className = 'grid category-grid';
-            showLoader();
-            pageTitle.textContent = 'Our Categories';
-            backButton.classList.remove('visible');
-            searchInput.value = '';
-            searchInput.placeholder = 'Search for categories...';
-
-            try {
-                const q = query(collection(db, 'categories'), where('status', '==', 'active'));
-                const querySnapshot = await getDocs(q);
-                categoriesData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                hideLoader();
-                renderCategories(categoriesData);
-            } catch (error) {
-                console.error("Error fetching categories: ", error);
-                showMessage('Could not load categories.');
             }
-        }
-        
-        function renderItems(itemsToRender) {
-            fadeContent(() => {
-                contentGrid.innerHTML = '';
-                if (itemsToRender.length === 0) {
-                    showMessage('No items found in this category.');
-                    return;
+
+            checkHash() {
+                const hash = window.location.hash;
+                if (hash.startsWith('#post-')) {
+                    const postId = hash.replace('#post-', '');
+                    this.loadPost(postId);
+                } else if (hash.startsWith('#category-')) {
+                    const categoryName = decodeURIComponent(hash.replace('#category-', ''));
+                    this.loadCategoryView(categoryName);
+                } else {
+                    this.showHome();
                 }
-                itemsToRender.forEach((item, index) => {
-                    const card = document.createElement('div');
-                    card.className = 'card item-card';
-                    card.style.cursor = 'default';
-                    card.style.animationDelay = `${index * 50}ms`;
+            }
 
-                    const cardImage = document.createElement('div');
-                    cardImage.className = 'card-image';
+            showHome() {
+                document.getElementById('homeView').style.display = 'block';
+                document.getElementById('singlePost').style.display = 'none';
+                document.getElementById('categoryView').style.display = 'none';
+                window.location.hash = '';
+                window.scrollTo(0, 0);
+            }
 
-                    if (item.imageUrl) {
-                        const img = document.createElement('img');
-                        img.src = item.imageUrl;
-                        img.alt = item.title;
-                        img.loading = 'lazy';
-                        cardImage.appendChild(img);
+            async loadCategories() {
+                try {
+                    const snapshot = await getDocs(collection(db, "categories"));
+                    const container = document.getElementById('categoriesGrid');
+                    const footerList = document.getElementById('footerCategories');
+                    container.innerHTML = '';
+                    footerList.innerHTML = '';
+
+                    if (snapshot.empty) {
+                        container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray);">No categories available yet.</p>';
+                        return;
+                    }
+
+                    snapshot.forEach(docSnap => {
+                        const cat = docSnap.data();
+
+                        const card = document.createElement('div');
+                        card.className = 'category-card';
+                        card.onclick = () => {
+                            window.location.hash = `#category-${encodeURIComponent(cat.name)}`;
+                        };
+
+                        card.innerHTML = `
+                            <img src="${cat.image || 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600'}" 
+                                 alt="${cat.name}" 
+                                 class="category-image"
+                                 onerror="this.src='https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600'">
+                            <div class="category-info">
+                                <h3 class="category-name">${cat.name}</h3>
+                                <p class="category-count">
+                                    <i class="fas fa-arrow-right"></i> Explore Collection
+                                </p>
+                            </div>
+                        `;
+                        container.appendChild(card);
+
+                        const li = document.createElement('li');
+                        li.innerHTML = `<a href="#category-${encodeURIComponent(cat.name)}">${cat.name}</a>`;
+                        footerList.appendChild(li);
+                    });
+                } catch (e) {
+                    console.error("Error loading categories:", e);
+                }
+            }
+
+            async loadCategoryView(categoryName) {
+                document.getElementById('homeView').style.display = 'none';
+                document.getElementById('singlePost').style.display = 'none';
+                document.getElementById('categoryView').style.display = 'block';
+                window.scrollTo(0, 0);
+
+                document.getElementById('categoryTitle').innerText = categoryName;
+                const container = document.getElementById('categoryPostsGrid');
+                container.innerHTML = '<div class="loader" style="display:block; grid-column: 1/-1;"></div>';
+
+                try {
+                    const q = query(collection(db, "posts"), where("category", "==", categoryName));
+                    const snapshot = await getDocs(q);
+                    container.innerHTML = '';
+
+                    if (snapshot.empty) {
+                        container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--gray);">No posts in ${categoryName} yet.</p>`;
+                        return;
+                    }
+
+                    let postCount = 0;
+                    snapshot.forEach(docSnap => {
+                        container.appendChild(this.createPostCard(docSnap.id, docSnap.data()));
+                        postCount++;
+
+                        // Insert ad after every 3 posts
+                        if (postCount % 3 === 0) {
+                            container.appendChild(createAdBanner());
+                        }
+                    });
+                } catch (e) {
+                    console.error("Error loading category posts:", e);
+                    container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray);">Error loading posts.</p>';
+                }
+            }
+
+            async loadFeatured() {
+                try {
+                    const q = query(collection(db, "posts"), where("featured", "==", true), limit(6));
+                    const snapshot = await getDocs(q);
+                    const container = document.getElementById('featuredGrid');
+                    container.innerHTML = '';
+
+                    if (snapshot.empty) {
+                        container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray);">No featured posts yet.</p>';
+                        return;
+                    }
+
+                    let postCount = 0;
+                    snapshot.forEach(docSnap => {
+                        container.appendChild(this.createPostCard(docSnap.id, docSnap.data()));
+                        postCount++;
+
+                        // Insert ad after every 3 posts
+                        if (postCount % 3 === 0) {
+                            container.appendChild(createAdBanner());
+                        }
+                    });
+                } catch (e) {
+                    console.error("Error loading featured posts:", e);
+                }
+            }
+
+            async loadLatest() {
+                const loader = document.getElementById('loader');
+                loader.style.display = 'block';
+
+                try {
+                    const q = query(collection(db, "posts"), orderBy("date", "desc"), limit(9));
+                    const snapshot = await getDocs(q);
+                    const container = document.getElementById('latestGrid');
+                    container.innerHTML = '';
+
+                    if (snapshot.empty) {
+                        container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray);">No posts yet.</p>';
+                        return;
+                    }
+
+                    let postCount = 0;
+                    snapshot.forEach(docSnap => {
+                        container.appendChild(this.createPostCard(docSnap.id, docSnap.data()));
+                        postCount++;
+
+                        // Insert ad after every 3 posts
+                        if (postCount % 3 === 0) {
+                            container.appendChild(createAdBanner());
+                        }
+                    });
+                } catch (e) {
+                    console.error("Error loading latest posts:", e);
+                    try {
+                        const snapshot = await getDocs(collection(db, "posts"));
+                        const container = document.getElementById('latestGrid');
+                        container.innerHTML = '';
+
+                        let postCount = 0;
+                        snapshot.forEach(docSnap => {
+                            container.appendChild(this.createPostCard(docSnap.id, docSnap.data()));
+                            postCount++;
+
+                            // Insert ad after every 3 posts
+                            if (postCount % 3 === 0) {
+                                container.appendChild(createAdBanner());
+                            }
+                        });
+                    } catch (e2) {
+                        console.error("Error loading posts:", e2);
+                    }
+                } finally {
+                    loader.style.display = 'none';
+                }
+            }
+
+            createPostCard(id, post) {
+                const card = document.createElement('div');
+                card.className = 'post-card';
+                card.onclick = () => {
+                    window.location.hash = `#post-${id}`;
+                };
+
+                const excerpt = this.stripHtml(post.content).substring(0, 140);
+                const date = new Date(post.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+
+                card.innerHTML = `
+                    <div class="post-image-container">
+                        <img src="${post.image || 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600'}" 
+                             alt="${post.title}" 
+                             class="post-image"
+                             onerror="this.src='https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600'">
+                    </div>
+                    <div class="post-body">
+                        <div class="post-meta">
+                            <span>${post.category || 'Nail Art'}</span>
+                            <span>${date}</span>
+                        </div>
+                        <h3 class="post-title">${post.title}</h3>
+                        <p class="post-excerpt">${excerpt}...</p>
+                        <span class="read-more">
+                            View Design <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </div>
+                `;
+
+                return card;
+            }
+
+            async loadPost(id) {
+                document.getElementById('homeView').style.display = 'none';
+                document.getElementById('categoryView').style.display = 'none';
+                document.getElementById('singlePost').style.display = 'block';
+                window.scrollTo(0, 0);
+
+                try {
+                    const docRef = doc(db, "posts", id);
+                    const docSnap = await getDoc(docRef);
+
+                    if (docSnap.exists()) {
+                        const post = docSnap.data();
+                        const date = new Date(post.date).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        });
+
+                        document.getElementById('postTitle').innerText = post.title;
+                        document.getElementById('postCategory').innerText = post.category;
+                        document.getElementById('postDate').innerText = date;
+                        document.getElementById('postImage').src = post.image || 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=900';
+
+                        // Insert ads in post content
+                        const contentDiv = document.getElementById('postBody');
+                        contentDiv.innerHTML = post.content;
+
+                        // Add ad banners after content
+                        const adBanner1 = createAdBanner();
+                        const adBanner2 = createAdBanner();
+                        contentDiv.appendChild(adBanner1);
+                        contentDiv.appendChild(adBanner2);
                     } else {
-                        cardImage.classList.add('no-image');
+                        document.getElementById('singlePost').innerHTML = '<div class="container"><h2>Post not found</h2></div>';
                     }
-                    
-                    const cardContent = document.createElement('div');
-                    cardContent.className = 'card-content';
-                    cardContent.innerHTML = `
-                        <h3>${item.title}</h3>
-                        <p>${item.description || ''}</p>
-                    `;
+                } catch (e) {
+                    console.error("Error loading post:", e);
+                }
+            }
 
-                    card.append(cardImage, cardContent);
-                    contentGrid.appendChild(card);
-                });
-            });
+            toggleSearch() {
+                const overlay = document.getElementById('searchOverlay');
+                overlay.classList.toggle('active');
+                if (overlay.classList.contains('active')) {
+                    document.getElementById('searchInput').focus();
+                }
+            }
+
+            async handleSearch(e) {
+                if (e.key === 'Enter') {
+                    const term = e.target.value.toLowerCase().trim();
+                    if (!term) return;
+
+                    const resultsContainer = document.getElementById('searchResults');
+                    resultsContainer.innerHTML = '<div class="loader" style="display:block;"></div>';
+
+                    try {
+                        const snapshot = await getDocs(collection(db, "posts"));
+                        resultsContainer.innerHTML = '';
+
+                        const results = document.createElement('div');
+                        results.className = 'posts-grid';
+                        let found = false;
+                        let postCount = 0;
+
+                        snapshot.forEach(docSnap => {
+                            const post = docSnap.data();
+                            if (post.title.toLowerCase().includes(term) ||
+                                post.content.toLowerCase().includes(term) ||
+                                (post.category && post.category.toLowerCase().includes(term))) {
+                                results.appendChild(this.createPostCard(docSnap.id, post));
+                                found = true;
+                                postCount++;
+
+                                // Insert ad after every 3 posts
+                                if (postCount % 3 === 0) {
+                                    results.appendChild(createAdBanner());
+                                }
+                            }
+                        });
+
+                        if (!found) {
+                            resultsContainer.innerHTML = `<p style="text-align: center; color: var(--gray); font-size: 1.2rem;">No results for "${term}"</p>`;
+                        } else {
+                            resultsContainer.appendChild(results);
+                        }
+                    } catch (e) {
+                        console.error("Error searching:", e);
+                        resultsContainer.innerHTML = '<p style="text-align: center; color: var(--gray);">Error performing search.</p>';
+                    }
+                }
+            }
+
+            stripHtml(html) {
+                const tmp = document.createElement("DIV");
+                tmp.innerHTML = html;
+                return tmp.textContent || tmp.innerText || "";
+            }
         }
 
-        async function fetchItems(categoryId, categoryName) {
-            currentView = 'items';
-            currentCategoryId = categoryId;
-            contentGrid.className = 'items-masonry-grid';
-            showLoader();
-            pageTitle.textContent = categoryName;
-            backButton.classList.add('visible');
-            searchInput.value = '';
-            searchInput.placeholder = 'Search for items in this category...';
-
-            try {
-                const q = query(collection(db, 'items'), where('categoryId', '==', categoryId), where('status', '==', 'active'));
-                const querySnapshot = await getDocs(q);
-                itemsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                hideLoader();
-                renderItems(itemsData);
-            } catch (error) {
-                console.error("Error fetching items: ", error);
-                showMessage('Could not load items.');
-            }
-        }
-        
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            if (currentView === 'categories') {
-                const filteredCategories = categoriesData.filter(cat => 
-                    cat.name.toLowerCase().includes(searchTerm) || 
-                    (cat.description && cat.description.toLowerCase().includes(searchTerm))
-                );
-                renderCategories(filteredCategories);
-            } else {
-                const filteredItems = itemsData.filter(item => 
-                    item.title.toLowerCase().includes(searchTerm) ||
-                    (item.description && item.description.toLowerCase().includes(searchTerm))
-                );
-                renderItems(filteredItems);
-            }
-        });
-
-        backButton.addEventListener('click', fetchCategories);
-
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Set the homepage link for the logo
-            document.querySelector('.logo a').addEventListener('click', (e) => {
-                e.preventDefault();
-                if (currentView !== 'categories') {
-                    fetchCategories();
-                }
-            });
-            document.querySelector('.footer-logo a').addEventListener('click', (e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                 if (currentView !== 'categories') {
-                    setTimeout(fetchCategories, 400);
-                }
-            });
-
-
-            const showCats = await fetchSettings();
-            if(showCats) {
-                 fetchCategories();
-            } else {
-                 showMessage('Welcome to our hub of beauty and dreams!');
-                 pageTitle.style.display = 'none';
-                 hideLoader();
-            }
-        });
-
+        window.app = new NailArtApp();
     </script>
 </body>
-</html>--- END OF FILE index.tsx ---
-I'm not sure what to do. The user provided these files, but didn't say what to do.
-I'm not sure what to do. The user provided these files, but didn't say what to do.
+
+</html>
