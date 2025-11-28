@@ -1,1320 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DreamyBeautyHub | Dreamy Nail Designs & Inspiration</title>
-    <meta name="description"
-        content="Discover stunning nail art designs, trends, and inspiration for every season and occasion.">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <title>DreamyBeautyHub - Beauty, Skincare & Wellness</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+            colors: {
+              brand: {
+                50: '#fff1f2',
+                100: '#ffe4e6',
+                200: '#fecdd3',
+                300: '#fda4af',
+                400: '#fb7185',
+                500: '#f43f5e', // Rose
+                600: '#e11d48',
+              },
+              gold: {
+                400: '#d4af37',
+                500: '#c5a059', // Logo Gold
+                600: '#a38343',
+              }
+            }
+          }
+        }
+      }
+    </script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --rose: #E8A0BF;
-            --rose-dark: #D488A3;
-            --rose-light: #F3D1DC;
-            --cream: #FFF8F3;
-            --white: #FFFFFF;
-            --charcoal: #2D2D2D;
-            --gray: #6B6B6B;
-            --gold: #D4AF37;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            color: var(--charcoal);
-            background: var(--cream);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 600;
-        }
-
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(232, 160, 191, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .header.scrolled {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 90px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-            color: var(--charcoal);
-        }
-
-        .logo img {
-            height: 55px;
-        }
-
-        .logo-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 50px;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--charcoal);
-            font-weight: 500;
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            position: relative;
-            transition: color 0.3s;
-        }
-
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--rose);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--rose-dark);
-        }
-
-        .nav-links a:hover::before {
-            width: 100%;
-        }
-
-        .search-icon {
-            cursor: pointer;
-            font-size: 1.3rem;
-            color: var(--charcoal);
-            transition: color 0.3s;
-        }
-
-        .search-icon:hover {
-            color: var(--rose-dark);
-        }
-
-        /* Hero */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 140px 40px 80px;
-            background: linear-gradient(135deg, #FFF8F3 0%, #FFFFFF 50%, #FFF0F5 100%);
-            position: relative;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(232, 160, 191, 0.1) 0%, transparent 70%);
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateX(-50%) translateY(0);
-            }
-
-            50% {
-                transform: translateX(-50%) translateY(-20px);
-            }
-        }
-
-        .hero-content {
-            max-width: 900px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-tag {
-            display: inline-block;
-            padding: 10px 24px;
-            background: var(--white);
-            border: 1px solid var(--rose-light);
-            border-radius: 30px;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--rose-dark);
-            font-weight: 600;
-            margin-bottom: 30px;
-        }
-
-        .hero h1 {
-            font-size: 6rem;
-            line-height: 1.1;
-            margin-bottom: 30px;
-            color: var(--charcoal);
-        }
-
-        .hero-highlight {
-            background: linear-gradient(135deg, var(--rose) 0%, var(--rose-dark) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--gray);
-            margin-bottom: 50px;
-            line-height: 1.8;
-        }
-
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 18px 45px;
-            background: linear-gradient(135deg, var(--rose) 0%, var(--rose-dark) 100%);
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.4s;
-            box-shadow: 0 10px 30px rgba(232, 160, 191, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(232, 160, 191, 0.4);
-        }
-
-        /* Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        /* Section */
-        .section {
-            padding: 120px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .section-tag {
-            display: inline-block;
-            padding: 8px 20px;
-            background: var(--white);
-            border: 1px solid var(--rose-light);
-            border-radius: 30px;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--rose-dark);
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            font-size: 4rem;
-            color: var(--charcoal);
-            margin-bottom: 20px;
-        }
-
-        .section-desc {
-            font-size: 1.15rem;
-            color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Categories */
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        .category-card {
-            position: relative;
-            height: 450px;
-            border-radius: 20px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .category-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
-            z-index: 1;
-            transition: all 0.5s;
-        }
-
-        .category-card:hover::before {
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
-        }
-
-        .category-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-        }
-
-        .category-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.7s;
-        }
-
-        .category-card:hover .category-image {
-            transform: scale(1.1);
-        }
-
-        .category-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 35px;
-            z-index: 2;
-            color: var(--white);
-        }
-
-        .category-name {
-            font-size: 2.2rem;
-            font-family: 'Cormorant Garamond', serif;
-            margin-bottom: 8px;
-        }
-
-        .category-count {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Posts Grid */
-        .posts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 40px;
-        }
-
-        .post-card {
-            background: var(--white);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.4s;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-        }
-
-        .post-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-        }
-
-        .post-image-container {
-            position: relative;
-            height: 300px;
-            overflow: hidden;
-        }
-
-        .post-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s;
-        }
-
-        .post-card:hover .post-image {
-            transform: scale(1.08);
-        }
-
-        .post-body {
-            padding: 35px;
-        }
-
-        .post-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 18px;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--rose-dark);
-            font-weight: 600;
-        }
-
-        .post-title {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: var(--charcoal);
-            line-height: 1.3;
-        }
-
-        .post-excerpt {
-            color: var(--gray);
-            line-height: 1.7;
-            margin-bottom: 25px;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .read-more {
-            color: var(--rose-dark);
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: gap 0.3s;
-        }
-
-        .post-card:hover .read-more {
-            gap: 12px;
-        }
-
-        /* Ad Banner */
-        .ad-banner {
-            width: 320px;
-            height: 50px;
-            margin: 40px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--white);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        .ad-banner-grid {
-            grid-column: 1 / -1;
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
-
-        /* Single Post */
-        .single-post {
-            display: none;
-            padding: 140px 0 100px;
-        }
-
-        .post-wrapper {
-            max-width: 900px;
-            margin: 0 auto;
-            background: var(--white);
-            border-radius: 24px;
-            padding: 70px;
-            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.08);
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--charcoal);
-            text-decoration: none;
-            font-weight: 600;
-            margin-bottom: 40px;
-            padding: 12px 28px;
-            background: var(--cream);
-            border-radius: 50px;
-            transition: all 0.3s;
-        }
-
-        .back-link:hover {
-            background: var(--rose-light);
-            color: var(--rose-dark);
-            transform: translateX(-5px);
-        }
-
-        .post-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .post-header h1 {
-            font-size: 4rem;
-            margin-bottom: 25px;
-            line-height: 1.2;
-        }
-
-        .post-meta-large {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            color: var(--gray);
-            font-size: 1rem;
-        }
-
-        .post-featured-img {
-            width: 100%;
-            height: 550px;
-            object-fit: cover;
-            border-radius: 16px;
-            margin-bottom: 50px;
-        }
-
-        .post-content {
-            font-size: 1.15rem;
-            line-height: 1.9;
-            color: var(--charcoal);
-        }
-
-        .post-content p {
-            margin-bottom: 25px;
-        }
-
-        .post-content img {
-            max-width: 100%;
-            border-radius: 12px;
-            margin: 35px 0;
-        }
-
-        /* Category View */
-        .category-view {
-            display: none;
-            padding: 140px 0 100px;
-        }
-
-        /* Search Overlay */
-        .search-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(255, 255, 255, 0.98);
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-
-        .search-overlay.active {
-            display: flex;
-        }
-
-        .close-search {
-            position: absolute;
-            top: 50px;
-            right: 50px;
-            font-size: 3rem;
-            cursor: pointer;
-            color: var(--gray);
-            transition: all 0.3s;
-        }
-
-        .close-search:hover {
-            color: var(--rose-dark);
-            transform: rotate(90deg);
-        }
-
-        .search-container {
-            width: 90%;
-            max-width: 800px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 25px 0;
-            font-size: 3rem;
-            border: none;
-            border-bottom: 3px solid var(--rose-light);
-            background: transparent;
-            font-family: 'Cormorant Garamond', serif;
-            outline: none;
-            text-align: center;
-            color: var(--charcoal);
-        }
-
-        .search-input:focus {
-            border-color: var(--rose);
-        }
-
-        .search-results {
-            margin-top: 80px;
-            max-width: 1400px;
-            padding: 0 40px;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--white);
-            padding: 100px 0 40px;
-            border-top: 1px solid rgba(232, 160, 191, 0.2);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 60px;
-        }
-
-        .footer-col h3 {
-            font-size: 1.5rem;
-            margin-bottom: 25px;
-            color: var(--charcoal);
-        }
-
-        .footer-col p {
-            color: var(--gray);
-            line-height: 1.8;
-            margin-bottom: 25px;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 15px;
-        }
-
-        .footer-links a {
-            color: var(--gray);
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--rose-dark);
-            padding-left: 8px;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--cream);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--rose-dark);
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .social-icon:hover {
-            background: var(--rose);
-            color: var(--white);
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 40px;
-            border-top: 1px solid rgba(232, 160, 191, 0.2);
-            color: var(--gray);
-        }
-
-        /* Loader */
-        .loader {
-            width: 50px;
-            height: 50px;
-            border: 4px solid var(--rose-light);
-            border-top-color: var(--rose);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 60px auto;
-            display: none;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .hero h1 {
-                font-size: 4.5rem;
-            }
-
-            .section-title {
-                font-size: 3rem;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 3.5rem;
-            }
-
-            .section-title {
-                font-size: 2.5rem;
-            }
-
-            .categories-grid,
-            .posts-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .post-wrapper {
-                padding: 40px 30px;
-            }
-
-            .post-header h1 {
-                font-size: 2.8rem;
-            }
-        }
+        body { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        /* Smooth fade in */
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .prose p { margin-bottom: 1.5rem; line-height: 1.8; color: #4b5563; font-size: 1.125rem; }
+        .prose h2 { font-size: 1.75rem; font-family: 'Playfair Display', serif; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1.25rem; color: #111827; }
+        .prose ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.5rem; color: #4b5563; }
+        .prose strong { color: #be185d; font-weight: 600; }
+        .prose img { border-radius: 0.5rem; margin-top: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        .prose a { color: #f43f5e; text-decoration: underline; }
     </style>
 </head>
+<body class="bg-rose-50 min-h-screen flex flex-col selection:bg-rose-200 selection:text-rose-900">
 
-<body>
-    <!-- Header -->
-    <header class="header" id="header">
-        <nav class="nav-container">
-            <a href="#" class="logo" onclick="app.showHome()">
-                <img src="logo.png" alt="DreamyBeautyHub">
-                <span class="logo-text">DreamyBeautyHub</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="#" onclick="app.showHome()">Home</a></li>
-                <li><a href="#categories">Categories</a></li>
-                <li><a href="#latest">Latest</a></li>
-                <li><a href="#featured">Featured</a></li>
-            </ul>
-            <div class="search-icon" onclick="app.toggleSearch()">
-                <i class="fas fa-search"></i>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Search Overlay -->
-    <div class="search-overlay" id="searchOverlay">
-        <div class="close-search" onclick="app.toggleSearch()">&times;</div>
-        <div class="search-container">
-            <input type="text" class="search-input" id="searchInput" placeholder="Search designs..."
-                onkeyup="app.handleSearch(event)">
-        </div>
-        <div class="search-results" id="searchResults"></div>
-    </div>
-
-    <!-- Main Content -->
-    <main id="mainContent">
-        <!-- Home View -->
-        <div id="homeView">
-            <!-- Hero -->
-            <section class="hero">
-                <div class="hero-content">
-                    <span class="hero-tag">Nail Art Inspiration</span>
-                    <h1>Your <span class="hero-highlight">Perfect Nails</span><br>Start Here</h1>
-                    <p>Explore thousands of stunning nail designs, from elegant classics to bold statements. Find
-                        inspiration for every season, style, and occasion.</p>
-                    <a href="#categories" class="cta-button">
-                        Explore Designs <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </section>
-
-            <!-- Categories -->
-            <section class="section" id="categories">
-                <div class="container">
-                    <div class="section-header">
-                        <span class="section-tag">Browse by Style</span>
-                        <h2 class="section-title">Design Categories</h2>
-                        <p class="section-desc">From seasonal trends to timeless classics, discover nail art for every
-                            mood and moment</p>
-                    </div>
-                    <div class="categories-grid" id="categoriesGrid">
-                        <!-- Categories loaded here -->
-                    </div>
-                </div>
-            </section>
-
-            <!-- Featured -->
-            <section class="section" id="featured" style="background: var(--white);">
-                <div class="container">
-                    <div class="section-header">
-                        <span class="section-tag">Editor's Choice</span>
-                        <h2 class="section-title">Featured Designs</h2>
-                        <p class="section-desc">Hand-picked nail art that's trending right now</p>
-                    </div>
-                    <div class="posts-grid" id="featuredGrid">
-                        <!-- Featured posts loaded here -->
-                    </div>
-                </div>
-            </section>
-
-            <!-- Latest -->
-            <section class="section" id="latest">
-                <div class="container">
-                    <div class="section-header">
-                        <span class="section-tag">Just Added</span>
-                        <h2 class="section-title">Latest Designs</h2>
-                        <p class="section-desc">Fresh nail art ideas and inspiration</p>
-                    </div>
-                    <div class="posts-grid" id="latestGrid">
-                        <!-- Latest posts loaded here -->
-                    </div>
-                    <div class="loader" id="loader"></div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Single Post View -->
-        <div class="single-post" id="singlePost">
-            <div class="container">
-                <div class="post-wrapper">
-                    <a href="#" class="back-link" onclick="app.showHome()">
-                        <i class="fas fa-arrow-left"></i> Back to Gallery
-                    </a>
-                    <article>
-                        <div class="post-header">
-                            <div class="post-meta-large" id="postMeta">
-                                <span id="postCategory"></span>
-                                <span>•</span>
-                                <span id="postDate"></span>
-                            </div>
-                            <h1 id="postTitle"></h1>
+    <!-- Navbar -->
+    <nav class="bg-white/80 backdrop-blur-md border-b border-rose-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="#" onclick="window.location.hash=''; return false;" class="flex items-center gap-3 group" id="brand-link">
+                        <!-- Default Logo -->
+                        <div class="bg-rose-100 text-rose-600 p-2 rounded-full border border-rose-200 group-hover:bg-rose-200 transition">
+                            <i data-lucide="sparkles" class="w-5 h-5"></i>
                         </div>
-                        <img src="" alt="" id="postImage" class="post-featured-img">
-                        <div class="post-content" id="postBody"></div>
-                    </article>
+                        <span class="font-serif font-bold text-2xl tracking-wide text-gray-900">DREAMY<span class="text-rose-500">BEAUTY</span>HUB</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <a href="#" onclick="window.location.hash=''; return false;" class="text-gray-600 font-medium hover:text-rose-600 transition text-sm uppercase tracking-wider">Home</a>
+                    <a href="admin.html" class="text-gray-400 font-medium hover:text-rose-600 transition flex items-center gap-1 text-sm uppercase tracking-wider">
+                        <i data-lucide="lock" class="w-3 h-3"></i> Admin
+                    </a>
                 </div>
             </div>
         </div>
+    </nav>
 
-        <!-- Category View -->
-        <div class="category-view" id="categoryView">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">Category</span>
-                    <h2 class="section-title" id="categoryTitle"></h2>
-                </div>
-                <div class="posts-grid" id="categoryPostsGrid"></div>
-                <a href="#" class="back-link" onclick="app.showHome()" style="margin-top: 60px;">
-                    <i class="fas fa-arrow-left"></i> Back to Home
-                </a>
-            </div>
+    <!-- Main Content Container -->
+    <main id="app-root" class="flex-grow fade-in">
+        <!-- Content injected via JS -->
+        <div class="flex justify-center items-center h-96">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-rose-400"></div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <div class="logo" style="margin-bottom: 25px;">
-                        <img src="logo.png" alt="DreamyBeautyHub">
-                    </div>
-                    <p>Your ultimate destination for nail art inspiration. Discover beautiful designs, seasonal trends,
-                        and creative ideas for your next manicure.</p>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#" onclick="app.showHome()">Home</a></li>
-                        <li><a href="#categories">Categories</a></li>
-                        <li><a href="#latest">Latest</a></li>
-                        <li><a href="#featured">Featured</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Categories</h3>
-                    <ul class="footer-links" id="footerCategories">
-                        <!-- Categories loaded here -->
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>About</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Privacy</a></li>
-                        <li><a href="#">Terms</a></li>
-                    </ul>
-                </div>
+    <footer class="bg-white border-t border-rose-100 py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex justify-center items-center gap-2 mb-4">
+                <i data-lucide="flower-2" class="text-rose-300"></i>
             </div>
-            <div class="footer-bottom">
-                &copy; 2025 DreamyBeautyHub. All rights reserved.
-            </div>
+            <p class="font-serif text-gray-900 text-lg mb-2" id="footer-brand">DreamyBeautyHub</p>
+            <p class="text-gray-400 text-sm">© <span id="year"></span>. Glow with grace.</p>
         </div>
     </footer>
 
-    <!-- Firebase -->
+    <!-- Firebase Logic -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, getDocs, query, where, orderBy, limit, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
         const firebaseConfig = {
-            apiKey: "AIzaSyApYYIEiyvpNGO9m1g7JBA3e4Q6x1CSrMM",
-            authDomain: "dreamybeautyhub-b0500.firebaseapp.com",
-            databaseURL: "https://dreamybeautyhub-b0500-default-rtdb.firebaseio.com",
-            projectId: "dreamybeautyhub-b0500",
-            storageBucket: "dreamybeautyhub-b0500.firebasestorage.app",
-            messagingSenderId: "465258211378",
-            appId: "1:465258211378:web:2635d10695b0a39970742b",
-            measurementId: "G-CLQSNKV9GE"
+            apiKey: "AIzaSyCQL0cNijjLZnRSOoC3RZLnGmIo3VjlH_A",
+            authDomain: "primesnapsxplayer.firebaseapp.com",
+            databaseURL: "https://primesnapsxplayer-default-rtdb.firebaseio.com",
+            projectId: "primesnapsxplayer",
+            storageBucket: "primesnapsxplayer.firebasestorage.app",
+            messagingSenderId: "703281925000",
+            appId: "1:703281925000:web:f24c146929703da281c83d",
+            measurementId: "G-Q65Y1Y0SYE"
         };
 
-        const firebaseApp = initializeApp(firebaseConfig);
-        const db = getFirestore(firebaseApp);
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
 
-        // Ad Banner Function
-        function createAdBanner() {
-            const adDiv = document.createElement('div');
-            adDiv.className = 'ad-banner-grid';
-            adDiv.innerHTML = `
-                <div class="ad-banner">
-                    <script type="text/javascript">
-                        atOptions = {
-                            'key' : 'f53f3295a033bfa4a5b167657bec404f',
-                            'format' : 'iframe',
-                            'height' : 50,
-                            'width' : 320,
-                            'params' : {}
-                        };
-                    <\/script>
-                    <script type="text/javascript" src="//www.highperformanceformat.com/f53f3295a033bfa4a5b167657bec404f/invoke.js"><\/script>
-                </div>
-            `;
-            return adDiv;
+        // Global state
+        let allPosts = {};
+        let siteSettings = {};
+
+        // --- Render Functions ---
+        function updateBrandUI() {
+            const brandLink = document.getElementById('brand-link');
+            const footerBrand = document.getElementById('footer-brand');
+            
+            const brandName = siteSettings.brandName || "DREAMYBEAUTYHUB";
+            const brandLogo = siteSettings.brandLogo;
+
+            // Update Footer
+            footerBrand.textContent = brandName;
+            document.title = `${brandName} - Beauty, Skincare & Wellness`;
+
+            // Update Navbar Logo
+            if (brandLogo) {
+                // Image Logo
+                brandLink.innerHTML = `
+                    <img src="${brandLogo}" alt="${brandName}" class="h-10 w-auto object-contain">
+                    <span class="sr-only">${brandName}</span>
+                `;
+            } else {
+                // Text Logo (Default fallback)
+                brandLink.innerHTML = `
+                    <div class="bg-rose-100 text-rose-600 p-2 rounded-full border border-rose-200 group-hover:bg-rose-200 transition">
+                        <i data-lucide="sparkles" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-serif font-bold text-2xl tracking-wide text-gray-900">${brandName}</span>
+                `;
+                if(window.lucide) window.lucide.createIcons();
+            }
         }
 
-        class NailArtApp {
-            constructor() {
-                this.init();
-                this.setupScrollEffect();
-            }
+        function getHashId() {
+            return window.location.hash ? window.location.hash.substring(1) : null;
+        }
 
-            async init() {
-                this.checkHash();
-                window.addEventListener('hashchange', () => this.checkHash());
-                await this.loadCategories();
-                await this.loadFeatured();
-                await this.loadLatest();
-            }
+        function renderHome(posts) {
+            const container = document.getElementById('app-root');
+            window.scrollTo(0, 0);
 
-            setupScrollEffect() {
-                window.addEventListener('scroll', () => {
-                    const header = document.getElementById('header');
-                    if (window.scrollY > 50) {
-                        header.classList.add('scrolled');
-                    } else {
-                        header.classList.remove('scrolled');
-                    }
-                });
-            }
+            const postList = Object.entries(posts || {}).map(([key, val]) => ({ id: key, ...val })).reverse();
 
-            checkHash() {
-                const hash = window.location.hash;
-                if (hash.startsWith('#post-')) {
-                    const postId = hash.replace('#post-', '');
-                    this.loadPost(postId);
-                } else if (hash.startsWith('#category-')) {
-                    const categoryName = decodeURIComponent(hash.replace('#category-', ''));
-                    this.loadCategoryView(categoryName);
-                } else {
-                    this.showHome();
-                }
-            }
-
-            showHome() {
-                document.getElementById('homeView').style.display = 'block';
-                document.getElementById('singlePost').style.display = 'none';
-                document.getElementById('categoryView').style.display = 'none';
-                window.location.hash = '';
-                window.scrollTo(0, 0);
-            }
-
-            async loadCategories() {
-                try {
-                    const snapshot = await getDocs(collection(db, "categories"));
-                    const container = document.getElementById('categoriesGrid');
-                    const footerList = document.getElementById('footerCategories');
-                    container.innerHTML = '';
-                    footerList.innerHTML = '';
-
-                    if (snapshot.empty) {
-                        container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray);">No categories available yet.</p>';
-                        return;
-                    }
-
-                    snapshot.forEach(docSnap => {
-                        const cat = docSnap.data();
-
-                        const card = document.createElement('div');
-                        card.className = 'category-card';
-                        card.onclick = () => {
-                            window.location.hash = `#category-${encodeURIComponent(cat.name)}`;
-                        };
-
-                        card.innerHTML = `
-                            <img src="${cat.image || 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600'}" 
-                                 alt="${cat.name}" 
-                                 class="category-image"
-                                 onerror="this.src='https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600'">
-                            <div class="category-info">
-                                <h3 class="category-name">${cat.name}</h3>
-                                <p class="category-count">
-                                    <i class="fas fa-arrow-right"></i> Explore Collection
-                                </p>
-                            </div>
-                        `;
-                        container.appendChild(card);
-
-                        const li = document.createElement('li');
-                        li.innerHTML = `<a href="#category-${encodeURIComponent(cat.name)}">${cat.name}</a>`;
-                        footerList.appendChild(li);
-                    });
-                } catch (e) {
-                    console.error("Error loading categories:", e);
-                }
-            }
-
-            async loadCategoryView(categoryName) {
-                document.getElementById('homeView').style.display = 'none';
-                document.getElementById('singlePost').style.display = 'none';
-                document.getElementById('categoryView').style.display = 'block';
-                window.scrollTo(0, 0);
-
-                document.getElementById('categoryTitle').innerText = categoryName;
-                const container = document.getElementById('categoryPostsGrid');
-                container.innerHTML = '<div class="loader" style="display:block; grid-column: 1/-1;"></div>';
-
-                try {
-                    const q = query(collection(db, "posts"), where("category", "==", categoryName));
-                    const snapshot = await getDocs(q);
-                    container.innerHTML = '';
-
-                    if (snapshot.empty) {
-                        container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--gray);">No posts in ${categoryName} yet.</p>`;
-                        return;
-                    }
-
-                    let postCount = 0;
-                    snapshot.forEach(docSnap => {
-                        container.appendChild(this.createPostCard(docSnap.id, docSnap.data()));
-                        postCount++;
-
-                        // Insert ad after every 3 posts
-                        if (postCount % 3 === 0) {
-                            container.appendChild(createAdBanner());
-                        }
-                    });
-                } catch (e) {
-                    console.error("Error loading category posts:", e);
-                    container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray);">Error loading posts.</p>';
-                }
-            }
-
-            async loadFeatured() {
-                try {
-                    const q = query(collection(db, "posts"), where("featured", "==", true), limit(6));
-                    const snapshot = await getDocs(q);
-                    const container = document.getElementById('featuredGrid');
-                    container.innerHTML = '';
-
-                    if (snapshot.empty) {
-                        container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray);">No featured posts yet.</p>';
-                        return;
-                    }
-
-                    let postCount = 0;
-                    snapshot.forEach(docSnap => {
-                        container.appendChild(this.createPostCard(docSnap.id, docSnap.data()));
-                        postCount++;
-
-                        // Insert ad after every 3 posts
-                        if (postCount % 3 === 0) {
-                            container.appendChild(createAdBanner());
-                        }
-                    });
-                } catch (e) {
-                    console.error("Error loading featured posts:", e);
-                }
-            }
-
-            async loadLatest() {
-                const loader = document.getElementById('loader');
-                loader.style.display = 'block';
-
-                try {
-                    const q = query(collection(db, "posts"), orderBy("date", "desc"), limit(9));
-                    const snapshot = await getDocs(q);
-                    const container = document.getElementById('latestGrid');
-                    container.innerHTML = '';
-
-                    if (snapshot.empty) {
-                        container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--gray);">No posts yet.</p>';
-                        return;
-                    }
-
-                    let postCount = 0;
-                    snapshot.forEach(docSnap => {
-                        container.appendChild(this.createPostCard(docSnap.id, docSnap.data()));
-                        postCount++;
-
-                        // Insert ad after every 3 posts
-                        if (postCount % 3 === 0) {
-                            container.appendChild(createAdBanner());
-                        }
-                    });
-                } catch (e) {
-                    console.error("Error loading latest posts:", e);
-                    try {
-                        const snapshot = await getDocs(collection(db, "posts"));
-                        const container = document.getElementById('latestGrid');
-                        container.innerHTML = '';
-
-                        let postCount = 0;
-                        snapshot.forEach(docSnap => {
-                            container.appendChild(this.createPostCard(docSnap.id, docSnap.data()));
-                            postCount++;
-
-                            // Insert ad after every 3 posts
-                            if (postCount % 3 === 0) {
-                                container.appendChild(createAdBanner());
-                            }
-                        });
-                    } catch (e2) {
-                        console.error("Error loading posts:", e2);
-                    }
-                } finally {
-                    loader.style.display = 'none';
-                }
-            }
-
-            createPostCard(id, post) {
-                const card = document.createElement('div');
-                card.className = 'post-card';
-                card.onclick = () => {
-                    window.location.hash = `#post-${id}`;
-                };
-
-                const excerpt = this.stripHtml(post.content).substring(0, 140);
-                const date = new Date(post.date).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-
-                card.innerHTML = `
-                    <div class="post-image-container">
-                        <img src="${post.image || 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600'}" 
-                             alt="${post.title}" 
-                             class="post-image"
-                             onerror="this.src='https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600'">
-                    </div>
-                    <div class="post-body">
-                        <div class="post-meta">
-                            <span>${post.category || 'Nail Art'}</span>
-                            <span>${date}</span>
+            if (postList.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-32">
+                        <div class="mx-auto w-16 h-16 bg-rose-100 rounded-full flex items-center justify-center mb-4 text-rose-500">
+                            <i data-lucide="pen-tool"></i>
                         </div>
-                        <h3 class="post-title">${post.title}</h3>
-                        <p class="post-excerpt">${excerpt}...</p>
-                        <span class="read-more">
-                            View Design <i class="fas fa-arrow-right"></i>
-                        </span>
+                        <h2 class="text-3xl font-serif font-bold text-gray-900 mb-2">No stories yet</h2>
+                        <p class="text-gray-500">Beauty takes time. Check back soon for updates.</p>
                     </div>
                 `;
-
-                return card;
+                if(window.lucide) window.lucide.createIcons();
+                return;
             }
 
-            async loadPost(id) {
-                document.getElementById('homeView').style.display = 'none';
-                document.getElementById('categoryView').style.display = 'none';
-                document.getElementById('singlePost').style.display = 'block';
-                window.scrollTo(0, 0);
+            let html = `
+                <!-- Hero -->
+                <div class="bg-gradient-to-b from-white to-rose-50 border-b border-rose-100 py-20 sm:py-28">
+                    <div class="max-w-4xl mx-auto px-4 text-center">
+                        <span class="text-rose-500 font-medium tracking-widest text-sm uppercase mb-4 block">Welcome to Your Sanctuary</span>
+                        <h1 class="text-5xl sm:text-7xl font-serif font-bold text-gray-900 mb-6 tracking-tight">
+                            Radiate <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-gold-500">Elegance</span>
+                        </h1>
+                        <p class="text-xl text-gray-500 leading-relaxed font-light max-w-2xl mx-auto">
+                            Discover the secrets to glowing skin, timeless beauty trends, and self-care rituals designed just for you.
+                        </p>
+                    </div>
+                </div>
 
-                try {
-                    const docRef = doc(db, "posts", id);
-                    const docSnap = await getDoc(docRef);
+                <!-- Grid -->
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                    <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+            `;
 
-                    if (docSnap.exists()) {
-                        const post = docSnap.data();
-                        const date = new Date(post.date).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric'
-                        });
+            postList.forEach(post => {
+                const dateStr = post.date ? new Date(post.date).toLocaleDateString() : 'Recent';
+                const tagsHtml = (post.tags || []).slice(0, 1).map(t => 
+                    `<span class="inline-block bg-white/95 backdrop-blur-sm text-rose-600 text-[10px] px-3 py-1 rounded-sm font-bold uppercase tracking-widest border border-rose-100">${t}</span>`
+                ).join('');
+                
+                html += `
+                    <a href="#${post.id}" class="group bg-white rounded-t-2xl rounded-b-lg shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-500 overflow-hidden flex flex-col h-full border border-rose-50">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="${post.coverImage || 'https://images.unsplash.com/photo-1596462502278-27bfdd403348?auto=format&fit=crop&q=80'}" alt="${post.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out">
+                            <div class="absolute bottom-4 left-4">${tagsHtml}</div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300"></div>
+                        </div>
+                        <div class="p-8 flex-1 flex flex-col">
+                            <div class="flex items-center text-xs text-gold-600 font-medium mb-4 gap-2 uppercase tracking-wider">
+                                <span>${dateStr}</span>
+                                <span class="w-1 h-1 bg-gold-400 rounded-full"></span>
+                                <span>${post.author || 'Editor'}</span>
+                            </div>
+                            <h2 class="text-2xl font-serif font-bold text-gray-900 mb-3 group-hover:text-rose-600 transition leading-tight">${post.title}</h2>
+                            <p class="text-gray-500 line-clamp-3 mb-6 flex-1 font-light leading-relaxed">${post.excerpt || ''}</p>
+                            <div class="flex items-center text-rose-500 font-medium text-sm group/link">
+                                Read Article <i data-lucide="arrow-right" class="w-4 h-4 ml-2 transform group-hover/link:translate-x-1 transition"></i>
+                            </div>
+                        </div>
+                    </a>
+                `;
+            });
 
-                        document.getElementById('postTitle').innerText = post.title;
-                        document.getElementById('postCategory').innerText = post.category;
-                        document.getElementById('postDate').innerText = date;
-                        document.getElementById('postImage').src = post.image || 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=900';
+            html += `</div></div>`;
+            container.innerHTML = html;
+            if(window.lucide) window.lucide.createIcons();
+        }
 
-                        // Insert ads in post content
-                        const contentDiv = document.getElementById('postBody');
-                        contentDiv.innerHTML = post.content;
-
-                        // Add ad banners after content
-                        const adBanner1 = createAdBanner();
-                        const adBanner2 = createAdBanner();
-                        contentDiv.appendChild(adBanner1);
-                        contentDiv.appendChild(adBanner2);
-                    } else {
-                        document.getElementById('singlePost').innerHTML = '<div class="container"><h2>Post not found</h2></div>';
-                    }
-                } catch (e) {
-                    console.error("Error loading post:", e);
-                }
+        function renderPost(post) {
+            const container = document.getElementById('app-root');
+            window.scrollTo(0, 0);
+            
+            if (!post) {
+                container.innerHTML = `
+                    <div class="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
+                        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4 text-gray-400">
+                            <i data-lucide="file-question" class="w-8 h-8"></i>
+                        </div>
+                        <h2 class="text-2xl font-serif font-bold text-gray-900 mb-2">Story Not Found</h2>
+                        <p class="text-gray-500 mb-6">This article may have been removed or is unavailable.</p>
+                        <a href="#" onclick="window.location.hash=''; return false;" class="px-6 py-2 bg-rose-500 text-white rounded-full font-medium hover:bg-rose-600 transition">Return Home</a>
+                    </div>
+                `;
+                if(window.lucide) window.lucide.createIcons();
+                return;
             }
 
-            toggleSearch() {
-                const overlay = document.getElementById('searchOverlay');
-                overlay.classList.toggle('active');
-                if (overlay.classList.contains('active')) {
-                    document.getElementById('searchInput').focus();
-                }
-            }
+            document.title = `${post.title} - ${siteSettings.brandName || 'DreamyBeautyHub'}`;
+            const dateStr = post.date ? new Date(post.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : 'Unknown Date';
+            
+            container.innerHTML = `
+                <div class="bg-white min-h-screen">
+                    <div class="fixed top-0 left-0 h-1 bg-rose-500 z-50 w-full transform origin-left scale-x-0" id="readingProgress"></div>
 
-            async handleSearch(e) {
-                if (e.key === 'Enter') {
-                    const term = e.target.value.toLowerCase().trim();
-                    if (!term) return;
+                    <article class="max-w-3xl mx-auto px-4 py-16">
+                        <a href="#" onclick="window.location.hash=''; return false;" class="inline-flex items-center text-gray-400 hover:text-rose-600 mb-10 transition text-sm font-medium uppercase tracking-wider">
+                            <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i> Back to Journal
+                        </a>
+                        
+                        <header class="mb-12 text-center">
+                            <div class="flex justify-center gap-3 mb-8">
+                                ${(post.tags || []).map(t => `<span class="bg-rose-50 text-rose-600 px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase">${t}</span>`).join('')}
+                            </div>
+                            <h1 class="text-4xl md:text-6xl font-serif font-bold text-gray-900 mb-8 leading-tight">${post.title}</h1>
+                            <div class="flex items-center justify-center space-x-3 text-gray-500 text-sm">
+                                <span class="font-medium text-gray-900 italic">By ${post.author || 'DreamyBeauty Team'}</span>
+                                <span class="text-gray-300">•</span>
+                                <time class="uppercase tracking-wide">${dateStr}</time>
+                            </div>
+                        </header>
 
-                    const resultsContainer = document.getElementById('searchResults');
-                    resultsContainer.innerHTML = '<div class="loader" style="display:block;"></div>';
+                        <div class="mb-16 -mx-4 sm:-mx-10 shadow-2xl rounded-sm overflow-hidden">
+                            <img src="${post.coverImage || 'https://images.unsplash.com/photo-1596462502278-27bfdd403348?auto=format&fit=crop&q=80'}" alt="${post.title}" class="w-full h-auto object-cover max-h-[600px]">
+                        </div>
 
-                    try {
-                        const snapshot = await getDocs(collection(db, "posts"));
-                        resultsContainer.innerHTML = '';
+                        <div class="prose prose-lg prose-rose mx-auto font-serif text-gray-700 leading-loose">
+                            ${(post.content || '').replace(/\n/g, '<br>')}
+                        </div>
+                        
+                        <div class="mt-20 pt-10 border-t border-rose-100 text-center">
+                             <p class="font-serif italic text-gray-400 text-lg">Thanks for reading</p>
+                             <div class="mt-4 flex justify-center">
+                                <i data-lucide="heart" class="text-rose-300 w-6 h-6"></i>
+                             </div>
+                        </div>
+                    </article>
+                </div>
+            `;
+            if(window.lucide) window.lucide.createIcons();
+            
+            window.onscroll = function() {
+                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                let scrolled = (winScroll / height) * 100;
+                const bar = document.getElementById("readingProgress");
+                if(bar) bar.style.transform = `scaleX(${scrolled / 100})`;
+            };
+        }
 
-                        const results = document.createElement('div');
-                        results.className = 'posts-grid';
-                        let found = false;
-                        let postCount = 0;
-
-                        snapshot.forEach(docSnap => {
-                            const post = docSnap.data();
-                            if (post.title.toLowerCase().includes(term) ||
-                                post.content.toLowerCase().includes(term) ||
-                                (post.category && post.category.toLowerCase().includes(term))) {
-                                results.appendChild(this.createPostCard(docSnap.id, post));
-                                found = true;
-                                postCount++;
-
-                                // Insert ad after every 3 posts
-                                if (postCount % 3 === 0) {
-                                    results.appendChild(createAdBanner());
-                                }
-                            }
-                        });
-
-                        if (!found) {
-                            resultsContainer.innerHTML = `<p style="text-align: center; color: var(--gray); font-size: 1.2rem;">No results for "${term}"</p>`;
-                        } else {
-                            resultsContainer.appendChild(results);
-                        }
-                    } catch (e) {
-                        console.error("Error searching:", e);
-                        resultsContainer.innerHTML = '<p style="text-align: center; color: var(--gray);">Error performing search.</p>';
-                    }
-                }
-            }
-
-            stripHtml(html) {
-                const tmp = document.createElement("DIV");
-                tmp.innerHTML = html;
-                return tmp.textContent || tmp.innerText || "";
+        function handleRouting() {
+            const postId = getHashId();
+            if (postId) {
+                renderPost(allPosts[postId]);
+            } else {
+                renderHome(allPosts);
             }
         }
 
-        window.app = new NailArtApp();
+        // --- Initialization ---
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const postsRef = ref(db, 'posts');
+        onValue(postsRef, (snapshot) => {
+            allPosts = snapshot.val() || {};
+            handleRouting();
+        });
+
+        const settingsRef = ref(db, 'settings');
+        onValue(settingsRef, (snapshot) => {
+            siteSettings = snapshot.val() || {};
+            updateBrandUI();
+        });
+
+        window.addEventListener('hashchange', handleRouting);
+
     </script>
 </body>
-
 </html>
