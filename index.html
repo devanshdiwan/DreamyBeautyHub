@@ -257,6 +257,7 @@
                 appState.searchQuery = '';
                 window.location.hash = '';
                 window.scrollTo(0, 0);
+                window.onscroll = null; // Clear reading progress listener
             },
             viewPost: (id) => {
                 window.location.hash = id;
@@ -325,6 +326,7 @@
         }
 
         function renderHome(posts) {
+            window.onscroll = null; // Ensure no scroll listener from post view
             const container = document.getElementById('app-root');
             const allPostsArray = Object.entries(posts || {}).map(([key, val]) => ({ id: key, ...val })).reverse();
             const tags = getUniqueTags(posts);
@@ -472,6 +474,7 @@
         }
 
         function renderPage(pageId) {
+            window.onscroll = null;
             const container = document.getElementById('app-root');
             window.scrollTo(0, 0);
 
@@ -520,11 +523,13 @@
                 .replace(/<br>\s*<(h2|h3|blockquote|div|p|img)/g, '<$1')
                 .replace(/<\/(h2|h3|blockquote|div|p)>\s*<br>/g, '</$1>');
 
+            // IMPORTANT: Reading Progress Bar is moved OUTSIDE the .animate-enter container.
+            // If it is inside an element with transform (like animate-enter), position: fixed becomes relative to that element, not the viewport.
             container.innerHTML = `
-                <div class="bg-white min-h-screen animate-enter">
-                    <!-- Reading Progress -->
-                    <div class="fixed top-0 left-0 h-1 bg-gradient-to-r from-rose-400 to-rose-600 z-50 w-full transform origin-left scale-x-0 transition-transform duration-100 ease-out" id="readingProgress"></div>
+                 <!-- Reading Progress -->
+                <div id="readingProgress" class="fixed top-0 left-0 h-1.5 z-[100] w-full origin-left scale-x-0 bg-gradient-to-r from-rose-300 via-rose-500 to-rose-600 shadow-[0_2px_10px_rgba(225,29,72,0.5)] transition-transform duration-150 ease-out"></div>
 
+                <div class="bg-white min-h-screen animate-enter">
                     <article>
                         <!-- Header -->
                         <header class="max-w-3xl mx-auto px-4 sm:px-6 pt-8 sm:pt-20 pb-6 sm:pb-8 text-center">
