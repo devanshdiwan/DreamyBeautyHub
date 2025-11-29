@@ -6,7 +6,7 @@
     <title>DreamyBeautyHub - Beauty, Skincare & Wellness</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
@@ -27,8 +27,12 @@
               },
               gold: {
                 400: '#d4af37',
-                500: '#c5a059', // Logo Gold
+                500: '#c5a059',
                 600: '#a38343',
+              },
+              stone: {
+                  50: '#fafaf9',
+                  100: '#f5f5f4',
               }
             }
           }
@@ -38,42 +42,62 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         .font-serif { font-family: 'Playfair Display', serif; }
-        /* Smooth fade in */
-        .fade-in { animation: fadeIn 0.5s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
+        /* Smooth fade in */
+        .fade-in { animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Custom Scrollbar for Tags */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
         /* Typography responsiveness */
-        .prose p { margin-bottom: 1.5rem; line-height: 1.8; color: #4b5563; font-size: 1.125rem; }
-        .prose h2 { font-size: 1.5rem; font-family: 'Playfair Display', serif; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; color: #111827; }
-        @media (min-width: 640px) {
-            .prose h2 { font-size: 1.75rem; margin-top: 2.5rem; margin-bottom: 1.25rem; }
-        }
+        .prose p { margin-bottom: 1.75rem; line-height: 1.9; color: #374151; font-size: 1.125rem; font-weight: 300; }
+        .prose h2 { font-size: 1.75rem; font-family: 'Playfair Display', serif; font-weight: 700; margin-top: 3rem; margin-bottom: 1.5rem; color: #1c1917; letter-spacing: -0.02em; }
+        .prose h3 { font-size: 1.4rem; font-family: 'Playfair Display', serif; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: #44403c; }
         .prose ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.5rem; color: #4b5563; }
         .prose strong { color: #be185d; font-weight: 600; }
-        .prose img { border-radius: 0.5rem; margin-top: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); width: 100%; height: auto; }
-        .prose a { color: #f43f5e; text-decoration: underline; }
+        .prose img { border-radius: 0.5rem; margin-top: 2.5rem; margin-bottom: 2.5rem; width: 100%; height: auto; display: block; }
+        .prose blockquote { border-left: 4px solid #f43f5e; padding-left: 1.5rem; font-style: italic; color: #57534e; margin: 2rem 0; font-family: 'Playfair Display', serif; font-size: 1.25rem; }
+        .prose a { color: #f43f5e; text-decoration: underline; text-underline-offset: 4px; transition: color 0.2s; }
+        .prose a:hover { color: #e11d48; }
+        
+        /* First letter dropcap */
+        .dropcap::first-letter {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            line-height: 0.85;
+            padding-right: 0.75rem;
+            padding-top: 0.25rem;
+            color: #f43f5e;
+            font-weight: 700;
+        }
     </style>
 </head>
-<body class="bg-rose-50 min-h-screen flex flex-col selection:bg-rose-200 selection:text-rose-900 overflow-x-hidden">
+<body class="bg-stone-50 min-h-screen flex flex-col selection:bg-rose-200 selection:text-rose-900 overflow-x-hidden text-gray-800">
 
     <!-- Navbar -->
-    <nav class="bg-white/90 backdrop-blur-md border-b border-rose-100 sticky top-0 z-50 shadow-sm transition-all duration-300">
+    <nav class="bg-white/80 backdrop-blur-lg border-b border-stone-100 sticky top-0 z-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16 sm:h-20">
                 <div class="flex items-center min-w-0 flex-1 mr-4">
-                    <a href="#" onclick="window.location.hash=''; return false;" class="flex items-center gap-2 sm:gap-3 group truncate" id="brand-link">
-                        <!-- Default Logo -->
-                        <div class="bg-rose-100 text-rose-600 p-1.5 sm:p-2 rounded-full border border-rose-200 group-hover:bg-rose-200 transition shrink-0">
-                            <i data-lucide="sparkles" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                    <a href="#" onclick="window.router.goHome(); return false;" class="flex items-center gap-3 group truncate" id="brand-link">
+                        <!-- Logo Fallback -->
+                        <div class="bg-gradient-to-tr from-rose-100 to-rose-50 text-rose-600 p-2 rounded-full border border-rose-100 group-hover:scale-105 transition duration-300 shrink-0 shadow-sm">
+                            <i data-lucide="sparkles" class="w-5 h-5"></i>
                         </div>
-                        <span class="font-serif font-bold text-lg sm:text-2xl tracking-wide text-gray-900 truncate">DREAMY<span class="text-rose-500">BEAUTY</span>HUB</span>
+                        <span class="font-serif font-bold text-xl sm:text-2xl tracking-tight text-gray-900 truncate">DREAMY<span class="text-rose-500">BEAUTY</span>HUB</span>
                     </a>
                 </div>
-                <div class="flex items-center space-x-4 sm:space-x-8 shrink-0">
-                    <a href="#" onclick="window.location.hash=''; return false;" class="text-gray-600 font-medium hover:text-rose-600 transition text-xs sm:text-sm uppercase tracking-wider">Home</a>
-                    <a href="admin.html" class="text-gray-400 font-medium hover:text-rose-600 transition flex items-center gap-1 text-xs sm:text-sm uppercase tracking-wider">
-                        <i data-lucide="lock" class="w-3 h-3"></i> <span class="hidden sm:inline">Admin</span>
-                    </a>
+                <div class="flex items-center space-x-6 shrink-0">
+                    <div class="hidden sm:flex space-x-6">
+                        <a href="#" onclick="window.router.goHome(); return false;" class="text-gray-500 hover:text-rose-600 transition font-medium text-sm tracking-wide">Journal</a>
+                        <a href="#newsletter" class="text-gray-500 hover:text-rose-600 transition font-medium text-sm tracking-wide">Subscribe</a>
+                    </div>
+                    <button class="sm:hidden text-gray-500 hover:text-rose-600" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -81,20 +105,30 @@
 
     <!-- Main Content Container -->
     <main id="app-root" class="flex-grow fade-in w-full">
-        <!-- Content injected via JS -->
-        <div class="flex justify-center items-center h-96">
-            <div class="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-rose-400"></div>
+        <!-- Loading State -->
+        <div class="flex justify-center items-center h-[80vh]">
+            <div class="flex flex-col items-center gap-4">
+                <div class="animate-spin rounded-full h-12 w-12 border-2 border-stone-200 border-t-rose-500"></div>
+                <span class="font-serif italic text-gray-400">Loading beauty...</span>
+            </div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-rose-100 py-8 sm:py-12 mt-auto">
+    <footer class="bg-white border-t border-stone-100 pt-16 pb-8 mt-auto">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <div class="flex justify-center items-center gap-2 mb-4">
-                <i data-lucide="flower-2" class="text-rose-300 w-5 h-5"></i>
+            <div class="flex justify-center items-center gap-2 mb-6">
+                <i data-lucide="flower-2" class="text-rose-300 w-6 h-6"></i>
             </div>
-            <p class="font-serif text-gray-900 text-lg mb-2" id="footer-brand">DreamyBeautyHub</p>
-            <p class="text-gray-400 text-sm">© <span id="year"></span>. Glow with grace.</p>
+            <h2 class="font-serif text-2xl font-bold text-gray-900 mb-4 tracking-tight" id="footer-brand">DreamyBeautyHub</h2>
+            
+            <div class="flex justify-center gap-6 mb-8 text-sm text-gray-500">
+                <a href="#" class="hover:text-rose-500 transition">About</a>
+                <a href="#" class="hover:text-rose-500 transition">Contact</a>
+                <a href="#" class="hover:text-rose-500 transition">Privacy Policy</a>
+            </div>
+
+            <p class="text-gray-400 text-xs tracking-wide">© <span id="year"></span>. All rights reserved. Glow with grace.</p>
         </div>
     </footer>
 
@@ -117,11 +151,50 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // Global state
+        // --- Global State ---
         let allPosts = {};
         let siteSettings = {};
+        let appState = {
+            filterTag: 'All',
+            searchQuery: ''
+        };
 
-        // --- Render Functions ---
+        // --- Router & Actions ---
+        window.router = {
+            goHome: () => {
+                appState.filterTag = 'All';
+                appState.searchQuery = '';
+                window.location.hash = '';
+                window.scrollTo(0, 0);
+            },
+            viewPost: (id) => {
+                window.location.hash = id;
+            }
+        };
+
+        window.actions = {
+            setTag: (tag) => {
+                appState.filterTag = tag;
+                appState.searchQuery = ''; // Clear search when picking tag
+                renderHome(allPosts);
+            },
+            search: (query) => {
+                appState.searchQuery = query.toLowerCase();
+                // Don't reset tag, allow searching within tags? Or reset? Let's reset tag for simplicity or keep 'All'.
+                if(query) appState.filterTag = 'All';
+                renderHome(allPosts);
+            }
+        };
+
+        // --- Helpers ---
+        function getUniqueTags(posts) {
+            const tags = new Set(['All']);
+            Object.values(posts).forEach(post => {
+                if(post.tags) post.tags.forEach(t => tags.add(t));
+            });
+            return Array.from(tags).sort();
+        }
+
         function updateBrandUI() {
             const brandLink = document.getElementById('brand-link');
             const footerBrand = document.getElementById('footer-brand');
@@ -131,171 +204,270 @@
 
             // Update Footer
             footerBrand.textContent = brandName;
-            document.title = `${brandName} - Beauty, Skincare & Wellness`;
+            document.title = `${brandName} - Modern Beauty Magazine`;
 
             // Update Navbar Logo
             if (brandLogo) {
-                // Image Logo
                 brandLink.innerHTML = `
                     <img src="${brandLogo}" alt="${brandName}" class="h-8 sm:h-10 w-auto object-contain">
-                    <span class="sr-only">${brandName}</span>
                 `;
             } else {
-                // Text Logo (Default fallback)
                 brandLink.innerHTML = `
-                    <div class="bg-rose-100 text-rose-600 p-1.5 sm:p-2 rounded-full border border-rose-200 group-hover:bg-rose-200 transition shrink-0">
-                        <i data-lucide="sparkles" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                    <div class="bg-gradient-to-tr from-rose-100 to-rose-50 text-rose-600 p-2 rounded-full border border-rose-100 group-hover:scale-105 transition duration-300 shrink-0 shadow-sm">
+                        <i data-lucide="sparkles" class="w-5 h-5"></i>
                     </div>
-                    <span class="font-serif font-bold text-lg sm:text-2xl tracking-wide text-gray-900 truncate">${brandName}</span>
+                    <span class="font-serif font-bold text-xl sm:text-2xl tracking-tight text-gray-900 truncate">${brandName}</span>
                 `;
                 if(window.lucide) window.lucide.createIcons();
             }
         }
 
-        function getHashId() {
-            return window.location.hash ? window.location.hash.substring(1) : null;
+        // --- Renderers ---
+
+        function renderNewsletter() {
+            return `
+                <div id="newsletter" class="bg-stone-900 text-white py-16 sm:py-24 overflow-hidden relative">
+                    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-rose-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+                    <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 bg-gold-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+                    
+                    <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+                        <span class="text-rose-400 font-bold tracking-widest uppercase text-xs sm:text-sm mb-4 block">Join the inner circle</span>
+                        <h2 class="text-3xl sm:text-5xl font-serif font-bold mb-6">Weekly Beauty Secrets</h2>
+                        <p class="text-stone-400 mb-10 text-lg max-w-xl mx-auto font-light">Get exclusive skincare tips, trend reports, and wellness guides delivered straight to your inbox.</p>
+                        
+                        <form onsubmit="event.preventDefault(); alert('Thank you for subscribing!');" class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                            <input type="email" placeholder="Your email address" class="flex-1 rounded-full bg-white/10 border border-white/20 text-white placeholder-stone-500 px-6 py-3 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white/20 transition backdrop-blur-sm" required>
+                            <button type="submit" class="px-8 py-3 bg-rose-500 hover:bg-rose-600 text-white font-medium rounded-full shadow-lg shadow-rose-900/20 transition transform hover:-translate-y-0.5">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            `;
         }
 
         function renderHome(posts) {
             const container = document.getElementById('app-root');
-            window.scrollTo(0, 0);
+            const allPostsArray = Object.entries(posts || {}).map(([key, val]) => ({ id: key, ...val })).reverse();
+            const tags = getUniqueTags(posts);
 
-            const postList = Object.entries(posts || {}).map(([key, val]) => ({ id: key, ...val })).reverse();
-
-            if (postList.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-20 sm:py-32 px-4">
-                        <div class="mx-auto w-12 h-12 sm:w-16 sm:h-16 bg-rose-100 rounded-full flex items-center justify-center mb-4 text-rose-500">
-                            <i data-lucide="pen-tool"></i>
-                        </div>
-                        <h2 class="text-2xl sm:text-3xl font-serif font-bold text-gray-900 mb-2">No stories yet</h2>
-                        <p class="text-gray-500 text-sm sm:text-base">Beauty takes time. Check back soon for updates.</p>
-                    </div>
-                `;
-                if(window.lucide) window.lucide.createIcons();
-                return;
+            // Filter Logic
+            let displayPosts = allPostsArray;
+            if (appState.searchQuery) {
+                displayPosts = allPostsArray.filter(p => 
+                    p.title.toLowerCase().includes(appState.searchQuery) || 
+                    (p.excerpt && p.excerpt.toLowerCase().includes(appState.searchQuery))
+                );
+            } else if (appState.filterTag !== 'All') {
+                displayPosts = allPostsArray.filter(p => p.tags && p.tags.includes(appState.filterTag));
             }
 
-            let html = `
-                <!-- Hero -->
-                <div class="bg-gradient-to-b from-white to-rose-50 border-b border-rose-100 py-12 sm:py-20 lg:py-28">
-                    <div class="max-w-4xl mx-auto px-4 text-center">
-                        <span class="text-rose-500 font-medium tracking-widest text-xs sm:text-sm uppercase mb-3 block">Welcome to Your Sanctuary</span>
-                        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-serif font-bold text-gray-900 mb-4 sm:mb-6 tracking-tight leading-tight">
-                            Radiate <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-gold-500">Elegance</span>
-                        </h1>
-                        <p class="text-base sm:text-xl text-gray-500 leading-relaxed font-light max-w-xl sm:max-w-2xl mx-auto">
-                            Discover the secrets to glowing skin, timeless beauty trends, and self-care rituals designed just for you.
-                        </p>
+            // Determine Layout Mode
+            // If filtering or searching, show simple grid. 
+            // If viewing "All" and no search, show Hero + Grid.
+            const showHero = appState.filterTag === 'All' && !appState.searchQuery && displayPosts.length > 0;
+            const heroPost = showHero ? displayPosts[0] : null;
+            const gridPosts = showHero ? displayPosts.slice(1) : displayPosts;
+
+            // Generate HTML components
+            
+            // 1. Controls (Search + Tags)
+            const controlsHtml = `
+                <div class="border-b border-stone-100 bg-white sticky top-16 sm:top-20 z-40 shadow-sm">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row gap-4 items-center justify-between">
+                        <!-- Tags -->
+                        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar w-full sm:w-auto pb-2 sm:pb-0 mask-image-gradient">
+                            ${tags.map(tag => `
+                                <button onclick="window.actions.setTag('${tag}')" 
+                                    class="whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 ${appState.filterTag === tag ? 'bg-rose-500 text-white shadow-md' : 'bg-stone-50 text-gray-500 hover:bg-stone-100 hover:text-gray-900'}">
+                                    ${tag}
+                                </button>
+                            `).join('')}
+                        </div>
+                        <!-- Search -->
+                        <div class="relative w-full sm:w-64">
+                            <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
+                            <input type="text" 
+                                placeholder="Search articles..." 
+                                value="${appState.searchQuery}"
+                                oninput="window.actions.search(this.value)"
+                                class="w-full pl-9 pr-4 py-2 bg-stone-50 border-none rounded-full text-sm focus:ring-1 focus:ring-rose-500 focus:bg-white transition placeholder-gray-400 text-gray-800">
+                        </div>
                     </div>
                 </div>
-
-                <!-- Grid -->
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
-                    <div class="grid gap-6 sm:gap-10 md:grid-cols-2 lg:grid-cols-3">
             `;
 
-            postList.forEach(post => {
-                const dateStr = post.date ? new Date(post.date).toLocaleDateString() : 'Recent';
-                const tagsHtml = (post.tags || []).slice(0, 1).map(t => 
-                    `<span class="inline-block bg-white/95 backdrop-blur-sm text-rose-600 text-[10px] px-3 py-1 rounded-sm font-bold uppercase tracking-widest border border-rose-100">${t}</span>`
-                ).join('');
-                
-                // Image fallback logic
-                const imgUrl = post.coverImage || 'https://images.unsplash.com/photo-1596462502278-27bfdd403348?auto=format&fit=crop&q=80';
-
-                html += `
-                    <a href="#${post.id}" class="group bg-white rounded-t-xl sm:rounded-t-2xl rounded-b-lg shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-500 overflow-hidden flex flex-col h-full border border-rose-50">
-                        <div class="h-56 sm:h-64 overflow-hidden relative bg-rose-100">
-                            <img src="${imgUrl}" loading="lazy" alt="${post.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out">
-                            <div class="absolute bottom-4 left-4 z-10">${tagsHtml}</div>
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300"></div>
-                        </div>
-                        <div class="p-5 sm:p-8 flex-1 flex flex-col">
-                            <div class="flex items-center text-xs text-gold-600 font-medium mb-3 sm:mb-4 gap-2 uppercase tracking-wider">
-                                <span>${dateStr}</span>
-                                <span class="w-1 h-1 bg-gold-400 rounded-full"></span>
-                                <span>${post.author || 'Editor'}</span>
+            // 2. Hero Section
+            let heroHtml = '';
+            if (heroPost) {
+                const dateStr = heroPost.date ? new Date(heroPost.date).toLocaleDateString(undefined, { month: 'long', day: 'numeric' }) : 'Featured';
+                heroHtml = `
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+                        <a href="#${heroPost.id}" class="group grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 items-center">
+                            <div class="lg:col-span-7 relative overflow-hidden rounded-2xl shadow-xl aspect-[4/3] sm:aspect-[16/9] lg:aspect-auto lg:h-[500px]">
+                                <img src="${heroPost.coverImage || 'https://images.unsplash.com/photo-1596462502278-27bfdd403348?auto=format&fit=crop&q=80'}" 
+                                     class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out">
+                                <div class="absolute top-4 left-4 bg-white/90 backdrop-blur text-rose-600 px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                                    Latest Story
+                                </div>
                             </div>
-                            <h2 class="text-xl sm:text-2xl font-serif font-bold text-gray-900 mb-2 sm:mb-3 group-hover:text-rose-600 transition leading-tight">${post.title}</h2>
-                            <p class="text-gray-500 line-clamp-3 mb-4 sm:mb-6 flex-1 font-light leading-relaxed text-sm sm:text-base">${post.excerpt || ''}</p>
-                            <div class="flex items-center text-rose-500 font-medium text-sm group/link">
-                                Read Article <i data-lucide="arrow-right" class="w-4 h-4 ml-2 transform group-hover/link:translate-x-1 transition"></i>
+                            <div class="lg:col-span-5 flex flex-col justify-center text-center lg:text-left">
+                                <div class="mb-4 flex items-center justify-center lg:justify-start gap-3 text-gold-600 text-xs font-bold uppercase tracking-widest">
+                                    <span>${dateStr}</span>
+                                    <span class="w-1 h-1 bg-gold-400 rounded-full"></span>
+                                    <span>${heroPost.author || 'Editor'}</span>
+                                </div>
+                                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6 leading-tight group-hover:text-rose-600 transition">
+                                    ${heroPost.title}
+                                </h1>
+                                <p class="text-gray-500 text-lg mb-8 font-light leading-relaxed line-clamp-3">
+                                    ${heroPost.excerpt || 'Read the full story to discover more beauty secrets.'}
+                                </p>
+                                <div class="inline-flex items-center text-rose-500 font-bold uppercase text-xs tracking-widest group-hover:translate-x-2 transition border-b-2 border-transparent hover:border-rose-200 self-center lg:self-start pb-1">
+                                    Read Story <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                                </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
                 `;
-            });
+            }
 
-            html += `</div></div>`;
-            container.innerHTML = html;
+            // 3. Grid Section
+            let gridHtml = '';
+            if (gridPosts.length > 0) {
+                gridHtml = `
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+                         ${!showHero ? `<h3 class="text-2xl font-serif font-bold text-gray-900 mb-8 border-b border-stone-200 pb-4">${appState.searchQuery ? `Search: "${appState.searchQuery}"` : appState.filterTag}</h3>` : ''}
+                        
+                        <div class="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+                            ${gridPosts.map(post => {
+                                const dateStr = post.date ? new Date(post.date).toLocaleDateString() : '';
+                                return `
+                                    <a href="#${post.id}" class="group flex flex-col h-full">
+                                        <div class="aspect-[3/2] overflow-hidden rounded-lg bg-stone-100 mb-6 relative shadow-sm">
+                                            <img src="${post.coverImage || 'https://images.unsplash.com/photo-1596462502278-27bfdd403348?auto=format&fit=crop&q=80'}" 
+                                                class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700 ease-out">
+                                            ${post.tags && post.tags[0] ? `<span class="absolute bottom-3 left-3 bg-white/95 backdrop-blur text-gray-900 text-[10px] px-2 py-1 font-bold uppercase tracking-wider">${post.tags[0]}</span>` : ''}
+                                        </div>
+                                        <div class="flex-1 flex flex-col">
+                                            <div class="flex items-center text-xs text-gray-400 mb-3 uppercase tracking-wider font-medium">
+                                                <span>${dateStr}</span>
+                                            </div>
+                                            <h2 class="text-xl font-serif font-bold text-gray-900 mb-3 leading-snug group-hover:text-rose-600 transition">
+                                                ${post.title}
+                                            </h2>
+                                            <p class="text-gray-500 text-sm leading-relaxed line-clamp-3 mb-4 font-light">
+                                                ${post.excerpt || ''}
+                                            </p>
+                                        </div>
+                                    </a>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            } else {
+                gridHtml = `
+                    <div class="flex flex-col items-center justify-center py-24 text-center">
+                        <div class="w-16 h-16 bg-stone-100 rounded-full flex items-center justify-center mb-4 text-stone-400">
+                            <i data-lucide="search-x" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-serif font-bold text-gray-900 mb-2">No stories found</h3>
+                        <p class="text-gray-500">Try adjusting your search or category.</p>
+                        <button onclick="window.actions.setTag('All')" class="mt-6 text-rose-500 hover:text-rose-600 font-medium text-sm underline">View all stories</button>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = `
+                ${controlsHtml}
+                ${heroHtml}
+                ${gridHtml}
+                ${renderNewsletter()}
+            `;
             if(window.lucide) window.lucide.createIcons();
         }
 
-        function renderPost(post) {
+        function renderPost(post, postId) {
             const container = document.getElementById('app-root');
             window.scrollTo(0, 0);
             
             if (!post) {
-                container.innerHTML = `
-                    <div class="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
-                        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4 text-gray-400">
-                            <i data-lucide="file-question" class="w-8 h-8"></i>
-                        </div>
-                        <h2 class="text-2xl font-serif font-bold text-gray-900 mb-2">Story Not Found</h2>
-                        <p class="text-gray-500 mb-6">This article may have been removed or is unavailable.</p>
-                        <a href="#" onclick="window.location.hash=''; return false;" class="px-6 py-2 bg-rose-500 text-white rounded-full font-medium hover:bg-rose-600 transition">Return Home</a>
-                    </div>
-                `;
-                if(window.lucide) window.lucide.createIcons();
+                container.innerHTML = `<div class="p-20 text-center">Story not found. <a href="#" onclick="window.router.goHome()" class="text-rose-500 underline">Go Home</a></div>`;
                 return;
             }
 
-            document.title = `${post.title} - ${siteSettings.brandName || 'DreamyBeautyHub'}`;
-            const dateStr = post.date ? new Date(post.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : 'Unknown Date';
-            
-            const imgUrl = post.coverImage || 'https://images.unsplash.com/photo-1596462502278-27bfdd403348?auto=format&fit=crop&q=80';
+            document.title = `${post.title} - ${siteSettings.brandName}`;
+            const dateStr = post.date ? new Date(post.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : '';
+
+            // Find related posts (random 3 excluding current)
+            const allOtherPosts = Object.entries(allPosts).filter(([k]) => k !== postId).map(([k, v]) => ({id:k, ...v}));
+            // Shuffle simple
+            const related = allOtherPosts.sort(() => 0.5 - Math.random()).slice(0, 3);
 
             container.innerHTML = `
                 <div class="bg-white min-h-screen">
-                    <div class="fixed top-0 left-0 h-1 bg-rose-500 z-50 w-full transform origin-left scale-x-0" id="readingProgress"></div>
+                    <!-- Reading Progress -->
+                    <div class="fixed top-0 left-0 h-1 bg-gradient-to-r from-rose-400 to-rose-600 z-50 w-full transform origin-left scale-x-0 transition-transform duration-100 ease-out" id="readingProgress"></div>
 
-                    <article class="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
-                        <a href="#" onclick="window.location.hash=''; return false;" class="inline-flex items-center text-gray-400 hover:text-rose-600 mb-6 sm:mb-10 transition text-xs sm:text-sm font-medium uppercase tracking-wider">
-                            <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i> Back to Journal
-                        </a>
-                        
-                        <header class="mb-8 sm:mb-12 text-center">
-                            <div class="flex flex-wrap justify-center gap-2 mb-4 sm:mb-8">
-                                ${(post.tags || []).map(t => `<span class="bg-rose-50 text-rose-600 px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold tracking-widest uppercase">${t}</span>`).join('')}
+                    <article>
+                        <!-- Header -->
+                        <header class="max-w-3xl mx-auto px-4 sm:px-6 pt-12 sm:pt-20 pb-8 text-center">
+                            <div class="flex flex-wrap justify-center gap-3 mb-6">
+                                ${(post.tags || []).map(t => `<span onclick="window.actions.setTag('${t}'); window.location.hash=''" class="cursor-pointer bg-stone-50 hover:bg-stone-100 text-gray-600 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase transition">${t}</span>`).join('')}
                             </div>
-                            <h1 class="text-3xl sm:text-5xl md:text-6xl font-serif font-bold text-gray-900 mb-4 sm:mb-8 leading-tight break-words">${post.title}</h1>
-                            <div class="flex items-center justify-center space-x-3 text-gray-500 text-xs sm:text-sm">
-                                <span class="font-medium text-gray-900 italic">By ${post.author || 'DreamyBeauty Team'}</span>
-                                <span class="text-gray-300">•</span>
-                                <time class="uppercase tracking-wide">${dateStr}</time>
+                            <h1 class="text-3xl sm:text-5xl md:text-6xl font-serif font-bold text-gray-900 mb-8 leading-tight">${post.title}</h1>
+                            <div class="flex items-center justify-center gap-4 text-sm border-t border-b border-stone-100 py-4 inline-flex w-full">
+                                <span class="font-bold text-gray-900 font-serif italic">By ${post.author || 'The Team'}</span>
+                                <span class="text-gray-300">|</span>
+                                <time class="text-gray-500 uppercase tracking-wider text-xs">${dateStr}</time>
                             </div>
                         </header>
 
-                        <div class="mb-8 sm:mb-16 -mx-4 sm:-mx-10 shadow-none sm:shadow-2xl rounded-none sm:rounded-sm overflow-hidden bg-rose-100">
-                            <img src="${imgUrl}" alt="${post.title}" class="w-full h-auto object-cover max-h-[400px] sm:max-h-[600px]">
+                        <!-- Featured Image -->
+                        <div class="max-w-5xl mx-auto px-4 sm:px-6 mb-12 sm:mb-16">
+                            <div class="aspect-[16/9] rounded-sm overflow-hidden shadow-lg bg-stone-100">
+                                <img src="${post.coverImage || ''}" alt="${post.title}" class="w-full h-full object-cover">
+                            </div>
                         </div>
 
-                        <div class="prose prose-lg prose-rose mx-auto font-serif text-gray-700 leading-loose break-words">
+                        <!-- Content -->
+                        <div class="prose prose-lg prose-rose mx-auto px-4 sm:px-6 font-serif text-gray-700 leading-loose pb-16 dropcap">
                             ${(post.content || '').replace(/\n/g, '<br>')}
                         </div>
-                        
-                        <div class="mt-12 sm:mt-20 pt-8 sm:pt-10 border-t border-rose-100 text-center">
-                             <p class="font-serif italic text-gray-400 text-lg">Thanks for reading</p>
-                             <div class="mt-4 flex justify-center">
-                                <i data-lucide="heart" class="text-rose-300 w-6 h-6"></i>
-                             </div>
+
+                        <!-- Author/End Note -->
+                        <div class="max-w-2xl mx-auto px-4 mb-20">
+                            <div class="bg-stone-50 p-8 rounded-xl text-center">
+                                <i data-lucide="sparkles" class="w-6 h-6 text-rose-400 mx-auto mb-3"></i>
+                                <p class="font-serif italic text-gray-600">"Beauty is illumination of your soul."</p>
+                            </div>
                         </div>
                     </article>
+
+                    <!-- Related Stories -->
+                    ${related.length > 0 ? `
+                        <div class="bg-stone-50 py-16 border-t border-stone-200">
+                            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+                                <h3 class="text-2xl font-serif font-bold text-gray-900 mb-10 text-center">You Might Also Like</h3>
+                                <div class="grid gap-8 sm:grid-cols-3">
+                                    ${related.map(p => `
+                                        <a href="#${p.id}" class="group block">
+                                            <div class="aspect-[4/3] bg-white rounded-lg overflow-hidden shadow-sm mb-4">
+                                                <img src="${p.coverImage}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                            </div>
+                                            <h4 class="font-serif font-bold text-lg text-gray-900 group-hover:text-rose-600 transition leading-snug">${p.title}</h4>
+                                        </a>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    ${renderNewsletter()}
                 </div>
             `;
             if(window.lucide) window.lucide.createIcons();
             
+            // Scroll Progress Logic
             window.onscroll = function() {
                 let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
                 let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -305,16 +477,16 @@
             };
         }
 
+        // --- Init ---
         function handleRouting() {
-            const postId = getHashId();
-            if (postId) {
-                renderPost(allPosts[postId]);
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                renderPost(allPosts[hash], hash);
             } else {
                 renderHome(allPosts);
             }
         }
 
-        // --- Initialization ---
         document.getElementById('year').textContent = new Date().getFullYear();
 
         const postsRef = ref(db, 'posts');
