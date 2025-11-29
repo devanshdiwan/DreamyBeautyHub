@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -121,9 +122,9 @@
                 <div class="flex items-center space-x-4 sm:space-x-6 shrink-0">
                     <div class="hidden sm:flex space-x-6">
                         <a href="#" onclick="window.router.goHome(); return false;" class="text-gray-500 hover:text-rose-600 transition font-medium text-sm tracking-wide btn-press">Journal</a>
-                        <a href="#newsletter" class="text-gray-500 hover:text-rose-600 transition font-medium text-sm tracking-wide btn-press">Subscribe</a>
+                        <a href="#newsletter" onclick="window.actions.scrollToNewsletter(); return false;" class="text-gray-500 hover:text-rose-600 transition font-medium text-sm tracking-wide btn-press">Subscribe</a>
                     </div>
-                    <button class="sm:hidden text-gray-500 hover:text-rose-600 p-2 btn-press" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})">
+                    <button class="sm:hidden text-gray-500 hover:text-rose-600 p-2 btn-press" onclick="window.actions.scrollToNewsletter()">
                         <i data-lucide="mail" class="w-5 h-5"></i>
                     </button>
                 </div>
@@ -166,14 +167,14 @@
         import { getDatabase, ref, onValue, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
         const firebaseConfig = {
-            apiKey: "AIzaSyCQL0cNijjLZnRSOoC3RZLnGmIo3VjlH_A",
-            authDomain: "primesnapsxplayer.firebaseapp.com",
-            databaseURL: "https://primesnapsxplayer-default-rtdb.firebaseio.com",
-            projectId: "primesnapsxplayer",
-            storageBucket: "primesnapsxplayer.firebasestorage.app",
-            messagingSenderId: "703281925000",
-            appId: "1:703281925000:web:f24c146929703da281c83d",
-            measurementId: "G-Q65Y1Y0SYE"
+          apiKey: "AIzaSyCGtnvcrDBBcLDUG1JRlXyIMtSezNg0GwQ",
+          authDomain: "dreamybeautyhub-3e78c.firebaseapp.com",
+          databaseURL: "https://dreamybeautyhub-3e78c-default-rtdb.firebaseio.com",
+          projectId: "dreamybeautyhub-3e78c",
+          storageBucket: "dreamybeautyhub-3e78c.firebasestorage.app",
+          messagingSenderId: "68196766734",
+          appId: "1:68196766734:web:b7f35fae922854a70a985f",
+          measurementId: "G-66PC2D53VP"
         };
 
         const app = initializeApp(firebaseConfig);
@@ -274,6 +275,15 @@
                 appState.searchQuery = query.toLowerCase();
                 if(query) appState.filterTag = 'All';
                 renderHome(allPosts);
+            },
+            scrollToNewsletter: () => {
+                const el = document.getElementById('newsletter');
+                if(el) {
+                    el.scrollIntoView({behavior: 'smooth'});
+                } else {
+                    // Fallback if not on a page that displays newsletter immediately
+                    window.location.hash = 'newsletter';
+                }
             },
             subscribe: (e) => {
                 e.preventDefault();
@@ -605,6 +615,12 @@
             
             if (hash === 'about' || hash === 'contact' || hash === 'privacy') {
                 renderPage(hash);
+            } else if (hash === 'newsletter') {
+                renderHome(allPosts);
+                setTimeout(() => {
+                    const el = document.getElementById('newsletter');
+                    if(el) el.scrollIntoView({behavior: 'smooth'});
+                }, 100);
             } else if (hash) {
                 renderPost(allPosts[hash], hash);
             } else {
@@ -631,13 +647,12 @@
             allPages = snapshot.val() || {};
             // If currently viewing a page, re-render it to show updates immediately
             const hash = window.location.hash.substring(1);
-            if(hash === 'about' || hash === 'contact' || hash === 'privacy') {
+            if (['about', 'contact', 'privacy'].includes(hash)) {
                 renderPage(hash);
             }
         });
 
         window.addEventListener('hashchange', handleRouting);
-
     </script>
 </body>
 </html>
