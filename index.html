@@ -43,9 +43,18 @@
         body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
         .font-serif { font-family: 'Playfair Display', serif; }
         
-        /* Smooth fade in */
-        .fade-in { animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Professional View Transition */
+        @keyframes slideUpFade {
+            0% { opacity: 0; transform: translateY(12px) scale(0.98); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .animate-enter { 
+            animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+        }
+
+        /* Button Press Effect */
+        .btn-press { transition: transform 0.1s; }
+        .btn-press:active { transform: scale(0.95); }
         
         /* Custom Scrollbar for Tags */
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -93,12 +102,15 @@
 </head>
 <body class="bg-stone-50 min-h-screen flex flex-col selection:bg-rose-200 selection:text-rose-900 overflow-x-hidden text-gray-800">
 
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-[60] flex flex-col gap-3 pointer-events-none"></div>
+
     <!-- Navbar -->
     <nav class="bg-white/90 backdrop-blur-lg border-b border-stone-100 sticky top-0 z-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16 sm:h-20">
                 <div class="flex items-center min-w-0 flex-1 mr-4">
-                    <a href="#" onclick="window.router.goHome(); return false;" class="flex items-center gap-2 sm:gap-3 group truncate" id="brand-link">
+                    <a href="#" onclick="window.router.goHome(); return false;" class="flex items-center gap-2 sm:gap-3 group truncate btn-press" id="brand-link">
                         <!-- Logo Fallback -->
                         <div class="bg-gradient-to-tr from-rose-100 to-rose-50 text-rose-600 p-1.5 sm:p-2 rounded-full border border-rose-100 group-hover:scale-105 transition duration-300 shrink-0 shadow-sm">
                             <i data-lucide="sparkles" class="w-4 h-4 sm:w-5 sm:h-5"></i>
@@ -108,10 +120,10 @@
                 </div>
                 <div class="flex items-center space-x-4 sm:space-x-6 shrink-0">
                     <div class="hidden sm:flex space-x-6">
-                        <a href="#" onclick="window.router.goHome(); return false;" class="text-gray-500 hover:text-rose-600 transition font-medium text-sm tracking-wide">Journal</a>
-                        <a href="#newsletter" class="text-gray-500 hover:text-rose-600 transition font-medium text-sm tracking-wide">Subscribe</a>
+                        <a href="#" onclick="window.router.goHome(); return false;" class="text-gray-500 hover:text-rose-600 transition font-medium text-sm tracking-wide btn-press">Journal</a>
+                        <a href="#newsletter" class="text-gray-500 hover:text-rose-600 transition font-medium text-sm tracking-wide btn-press">Subscribe</a>
                     </div>
-                    <button class="sm:hidden text-gray-500 hover:text-rose-600 p-2" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})">
+                    <button class="sm:hidden text-gray-500 hover:text-rose-600 p-2 btn-press" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})">
                         <i data-lucide="mail" class="w-5 h-5"></i>
                     </button>
                 </div>
@@ -120,9 +132,9 @@
     </nav>
 
     <!-- Main Content Container -->
-    <main id="app-root" class="flex-grow fade-in w-full">
+    <main id="app-root" class="flex-grow w-full">
         <!-- Loading State -->
-        <div class="flex justify-center items-center h-[80vh]">
+        <div class="flex justify-center items-center h-[80vh] animate-enter">
             <div class="flex flex-col items-center gap-4">
                 <div class="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-2 border-stone-200 border-t-rose-500"></div>
                 <span class="font-serif italic text-gray-400 text-sm sm:text-base">Loading beauty...</span>
@@ -139,9 +151,9 @@
             <h2 class="font-serif text-xl sm:text-2xl font-bold text-gray-900 mb-4 tracking-tight" id="footer-brand">DreamyBeautyHub</h2>
             
             <div class="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8 text-sm text-gray-500">
-                <a href="#about" class="hover:text-rose-500 transition">About</a>
-                <a href="#contact" class="hover:text-rose-500 transition">Contact</a>
-                <a href="#privacy" class="hover:text-rose-500 transition">Privacy Policy</a>
+                <a href="#about" class="hover:text-rose-500 transition btn-press">About</a>
+                <a href="#contact" class="hover:text-rose-500 transition btn-press">Contact</a>
+                <a href="#privacy" class="hover:text-rose-500 transition btn-press">Privacy Policy</a>
             </div>
 
             <p class="text-gray-400 text-[10px] sm:text-xs tracking-wide">© <span id="year"></span>. All rights reserved. Glow with grace.</p>
@@ -176,59 +188,31 @@
             searchQuery: ''
         };
 
-        // --- Router & Actions ---
-        window.router = {
-            goHome: () => {
-                appState.filterTag = 'All';
-                appState.searchQuery = '';
-                window.location.hash = '';
-                window.scrollTo(0, 0);
-            },
-            viewPost: (id) => {
-                window.location.hash = id;
-            }
-        };
-
-        window.actions = {
-            setTag: (tag) => {
-                appState.filterTag = tag;
-                appState.searchQuery = ''; // Clear search when picking tag
-                renderHome(allPosts);
-            },
-            search: (query) => {
-                appState.searchQuery = query.toLowerCase();
-                if(query) appState.filterTag = 'All';
-                renderHome(allPosts);
-            },
-            subscribe: (e) => {
-                e.preventDefault();
-                const emailInput = e.target.querySelector('input[type="email"]');
-                const btn = e.target.querySelector('button');
-                const email = emailInput.value;
-                
-                if(email) {
-                    const originalText = btn.innerText;
-                    btn.innerText = 'Subscribing...';
-                    btn.disabled = true;
-                    
-                    push(ref(db, 'subscribers'), {
-                        email: email,
-                        date: new Date().toISOString()
-                    }).then(() => {
-                        alert('Thank you for subscribing! You have been added to our exclusive list.');
-                        emailInput.value = '';
-                        btn.innerText = 'Subscribed';
-                        setTimeout(() => { btn.innerText = originalText; btn.disabled = false; }, 2000);
-                    }).catch(err => {
-                        alert('Something went wrong. Please try again.');
-                        btn.innerText = originalText;
-                        btn.disabled = false;
-                    });
-                }
-            }
-        };
-
         // --- Helpers ---
+        function showToast(message, isError = false) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-lg shadow-xl text-sm font-medium transform transition-all duration-500 translate-y-10 opacity-0 ${isError ? 'bg-red-50 text-red-600 border border-red-100' : 'bg-gray-900 text-white'}`;
+            toast.innerHTML = `
+                <i data-lucide="${isError ? 'alert-circle' : 'check-circle'}" class="w-5 h-5 ${isError ? 'text-red-500' : 'text-green-400'}"></i>
+                <span>${message}</span>
+            `;
+            
+            container.appendChild(toast);
+            if(window.lucide) window.lucide.createIcons();
+
+            // Animate In
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-10', 'opacity-0');
+            });
+
+            // Animate Out & Remove
+            setTimeout(() => {
+                toast.classList.add('translate-y-4', 'opacity-0');
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
         function getUniqueTags(posts) {
             const tags = new Set(['All']);
             Object.values(posts).forEach(post => {
@@ -266,6 +250,58 @@
             }
         }
 
+        // --- Router & Actions ---
+        window.router = {
+            goHome: () => {
+                appState.filterTag = 'All';
+                appState.searchQuery = '';
+                window.location.hash = '';
+                window.scrollTo(0, 0);
+            },
+            viewPost: (id) => {
+                window.location.hash = id;
+            }
+        };
+
+        window.actions = {
+            setTag: (tag) => {
+                appState.filterTag = tag;
+                appState.searchQuery = ''; // Clear search when picking tag
+                renderHome(allPosts);
+            },
+            search: (query) => {
+                appState.searchQuery = query.toLowerCase();
+                if(query) appState.filterTag = 'All';
+                renderHome(allPosts);
+            },
+            subscribe: (e) => {
+                e.preventDefault();
+                const emailInput = e.target.querySelector('input[type="email"]');
+                const btn = e.target.querySelector('button');
+                const email = emailInput.value;
+                
+                if(email) {
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = `<i class="animate-spin w-4 h-4 border-2 border-white/30 border-t-white rounded-full inline-block"></i>`;
+                    btn.disabled = true;
+                    
+                    push(ref(db, 'subscribers'), {
+                        email: email,
+                        date: new Date().toISOString()
+                    }).then(() => {
+                        showToast('Welcome to the inner circle! Subscription successful.');
+                        emailInput.value = '';
+                        btn.innerHTML = 'Subscribed';
+                        setTimeout(() => { btn.innerHTML = originalText; btn.disabled = false; }, 2000);
+                    }).catch(err => {
+                        showToast('Something went wrong. Please try again.', true);
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    });
+                }
+            }
+        };
+
         // --- Renderers ---
 
         function renderNewsletter() {
@@ -274,14 +310,14 @@
                     <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 sm:w-96 sm:h-96 bg-rose-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
                     <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-48 h-48 sm:w-72 sm:h-72 bg-gold-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
                     
-                    <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+                    <div class="max-w-4xl mx-auto px-4 text-center relative z-10 animate-enter">
                         <span class="text-rose-400 font-bold tracking-widest uppercase text-[10px] sm:text-sm mb-3 sm:mb-4 block">Join the inner circle</span>
                         <h2 class="text-2xl sm:text-5xl font-serif font-bold mb-4 sm:mb-6 leading-tight">Weekly Beauty Secrets</h2>
                         <p class="text-stone-400 mb-8 sm:mb-10 text-sm sm:text-lg max-w-xl mx-auto font-light leading-relaxed">Get exclusive skincare tips, trend reports, and wellness guides delivered straight to your inbox.</p>
                         
                         <form onsubmit="window.actions.subscribe(event)" class="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-md mx-auto">
                             <input type="email" placeholder="Your email address" class="flex-1 rounded-full bg-white/10 border border-white/20 text-white placeholder-stone-500 px-5 py-2.5 sm:px-6 sm:py-3 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white/20 transition backdrop-blur-sm" required>
-                            <button type="submit" class="px-6 py-2.5 sm:px-8 sm:py-3 bg-rose-500 hover:bg-rose-600 text-white text-sm font-medium rounded-full shadow-lg shadow-rose-900/20 transition transform hover:-translate-y-0.5">Subscribe</button>
+                            <button type="submit" class="px-6 py-2.5 sm:px-8 sm:py-3 bg-rose-500 hover:bg-rose-600 text-white text-sm font-medium rounded-full shadow-lg shadow-rose-900/20 transition transform hover:-translate-y-0.5 btn-press min-w-[120px]">Subscribe</button>
                         </form>
                     </div>
                 </div>
@@ -313,14 +349,14 @@
             
             // 1. Controls (Search + Tags)
             const controlsHtml = `
-                <div class="border-b border-stone-100 bg-white sticky top-16 sm:top-20 z-40 shadow-sm transition-all">
+                <div class="border-b border-stone-100 bg-white sticky top-16 sm:top-20 z-40 shadow-sm transition-all animate-enter">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-between">
                         <!-- Tags -->
                         <div class="w-full sm:w-auto overflow-hidden relative group">
                             <div class="flex items-center gap-2 overflow-x-auto no-scrollbar w-full sm:w-auto pb-1 sm:pb-0 mask-gradient-right pr-4">
                                 ${tags.map(tag => `
                                     <button onclick="window.actions.setTag('${tag}')" 
-                                        class="shrink-0 whitespace-nowrap px-4 py-2 sm:py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 select-none ${appState.filterTag === tag ? 'bg-rose-500 text-white shadow-md transform scale-105' : 'bg-stone-50 text-gray-500 hover:bg-stone-100 hover:text-gray-900'}">
+                                        class="shrink-0 whitespace-nowrap px-4 py-2 sm:py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 select-none btn-press ${appState.filterTag === tag ? 'bg-rose-500 text-white shadow-md transform scale-105' : 'bg-stone-50 text-gray-500 hover:bg-stone-100 hover:text-gray-900'}">
                                         ${tag}
                                     </button>
                                 `).join('')}
@@ -344,7 +380,7 @@
             if (heroPost) {
                 const dateStr = heroPost.date ? new Date(heroPost.date).toLocaleDateString(undefined, { month: 'long', day: 'numeric' }) : 'Featured';
                 heroHtml = `
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12 animate-enter" style="animation-delay: 100ms; opacity: 0; animation-fill-mode: forwards;">
                         <a href="#${heroPost.id}" class="group grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 items-center">
                             <!-- Mobile: Aspect Video (16/9), Desktop: Custom -->
                             <div class="lg:col-span-7 relative overflow-hidden rounded-xl sm:rounded-2xl shadow-lg aspect-video sm:aspect-[16/9] lg:aspect-auto lg:h-[500px]">
@@ -366,7 +402,7 @@
                                 <p class="text-gray-500 text-base sm:text-lg mb-6 sm:mb-8 font-light leading-relaxed line-clamp-3 sm:line-clamp-4">
                                     ${heroPost.excerpt || 'Read the full story to discover more beauty secrets.'}
                                 </p>
-                                <div class="inline-flex items-center text-rose-500 font-bold uppercase text-xs tracking-widest group-hover:translate-x-2 transition border-b-2 border-transparent hover:border-rose-200 self-center lg:self-start pb-1">
+                                <div class="inline-flex items-center text-rose-500 font-bold uppercase text-xs tracking-widest group-hover:translate-x-2 transition border-b-2 border-transparent hover:border-rose-200 self-center lg:self-start pb-1 btn-press">
                                     Read Story <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
                                 </div>
                             </div>
@@ -380,15 +416,16 @@
             if (gridPosts.length > 0) {
                 gridHtml = `
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16">
-                         ${!showHero ? `<h3 class="text-xl sm:text-2xl font-serif font-bold text-gray-900 mb-6 sm:mb-8 border-b border-stone-200 pb-3 sm:pb-4">${appState.searchQuery ? `Search: "${appState.searchQuery}"` : appState.filterTag}</h3>` : ''}
+                         ${!showHero ? `<h3 class="text-xl sm:text-2xl font-serif font-bold text-gray-900 mb-6 sm:mb-8 border-b border-stone-200 pb-3 sm:pb-4 animate-enter">${appState.searchQuery ? `Search: "${appState.searchQuery}"` : appState.filterTag}</h3>` : ''}
                         
                         <!-- Masonry Layout using Columns -->
                         <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 sm:gap-8 space-y-0">
-                            ${gridPosts.map(post => {
+                            ${gridPosts.map((post, index) => {
                                 const dateStr = post.date ? new Date(post.date).toLocaleDateString() : '';
+                                const delay = showHero ? (index * 50) + 200 : (index * 50); // Stagger
                                 return `
-                                    <div class="break-inside-avoid mb-6 sm:mb-8">
-                                        <a href="#${post.id}" class="group block h-full">
+                                    <div class="break-inside-avoid mb-6 sm:mb-8 animate-enter" style="animation-delay: ${delay}ms; opacity: 0; animation-fill-mode: forwards;">
+                                        <a href="#${post.id}" class="group block h-full btn-press">
                                             <div class="aspect-[3/2] overflow-hidden rounded-lg bg-stone-100 mb-3 sm:mb-4 relative shadow-sm">
                                                 <img src="${post.coverImage || 'https://images.unsplash.com/photo-1596462502278-27bfdd403348?auto=format&fit=crop&q=80'}" 
                                                     class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700 ease-out">
@@ -414,13 +451,13 @@
                 `;
             } else {
                 gridHtml = `
-                    <div class="flex flex-col items-center justify-center py-16 sm:py-24 text-center px-4">
+                    <div class="flex flex-col items-center justify-center py-16 sm:py-24 text-center px-4 animate-enter">
                         <div class="w-12 h-12 sm:w-16 sm:h-16 bg-stone-100 rounded-full flex items-center justify-center mb-4 text-stone-400">
                             <i data-lucide="search-x" class="w-6 h-6 sm:w-8 sm:h-8"></i>
                         </div>
                         <h3 class="text-lg sm:text-xl font-serif font-bold text-gray-900 mb-2">No stories found</h3>
                         <p class="text-sm sm:text-base text-gray-500">Try adjusting your search or category.</p>
-                        <button onclick="window.actions.setTag('All')" class="mt-6 text-rose-500 hover:text-rose-600 font-medium text-sm underline">View all stories</button>
+                        <button onclick="window.actions.setTag('All')" class="mt-6 text-rose-500 hover:text-rose-600 font-medium text-sm underline btn-press">View all stories</button>
                     </div>
                 `;
             }
@@ -446,7 +483,7 @@
             };
 
             container.innerHTML = `
-                <div class="bg-white min-h-[60vh]">
+                <div class="bg-white min-h-[60vh] animate-enter">
                      <header class="max-w-3xl mx-auto px-4 sm:px-6 pt-12 sm:pt-20 pb-8 sm:pb-10 text-center border-b border-stone-50">
                         <h1 class="text-3xl sm:text-5xl font-serif font-bold text-gray-900 mb-4">${titles[pageId] || 'Page'}</h1>
                         <div class="w-20 h-1 bg-rose-500 mx-auto"></div>
@@ -465,7 +502,7 @@
             window.scrollTo(0, 0);
             
             if (!post) {
-                container.innerHTML = `<div class="p-20 text-center">Story not found. <a href="#" onclick="window.router.goHome()" class="text-rose-500 underline">Go Home</a></div>`;
+                container.innerHTML = `<div class="p-20 text-center animate-enter">Story not found. <a href="#" onclick="window.router.goHome()" class="text-rose-500 underline">Go Home</a></div>`;
                 return;
             }
 
@@ -484,7 +521,7 @@
                 .replace(/<\/(h2|h3|blockquote|div|p)>\s*<br>/g, '</$1>');
 
             container.innerHTML = `
-                <div class="bg-white min-h-screen">
+                <div class="bg-white min-h-screen animate-enter">
                     <!-- Reading Progress -->
                     <div class="fixed top-0 left-0 h-1 bg-gradient-to-r from-rose-400 to-rose-600 z-50 w-full transform origin-left scale-x-0 transition-transform duration-100 ease-out" id="readingProgress"></div>
 
@@ -492,7 +529,7 @@
                         <!-- Header -->
                         <header class="max-w-3xl mx-auto px-4 sm:px-6 pt-8 sm:pt-20 pb-6 sm:pb-8 text-center">
                             <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                                ${(post.tags || []).map(t => `<span onclick="window.actions.setTag('${t}'); window.location.hash=''" class="cursor-pointer bg-stone-50 hover:bg-stone-100 text-gray-600 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase transition">${t}</span>`).join('')}
+                                ${(post.tags || []).map(t => `<span onclick="window.actions.setTag('${t}'); window.location.hash=''" class="cursor-pointer bg-stone-50 hover:bg-stone-100 text-gray-600 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase transition btn-press">${t}</span>`).join('')}
                             </div>
                             <h1 class="text-3xl sm:text-5xl md:text-6xl font-serif font-bold text-gray-900 mb-6 sm:mb-8 leading-tight tracking-tight">${post.title}</h1>
                             <div class="flex items-center justify-center gap-3 sm:gap-4 text-sm border-t border-b border-stone-100 py-3 sm:py-4 inline-flex w-full">
@@ -530,7 +567,7 @@
                                 <h3 class="text-xl sm:text-2xl font-serif font-bold text-gray-900 mb-8 sm:mb-10 text-center">You Might Also Like</h3>
                                 <div class="grid gap-6 sm:gap-8 sm:grid-cols-3">
                                     ${related.map(p => `
-                                        <a href="#${p.id}" class="group block">
+                                        <a href="#${p.id}" class="group block btn-press">
                                             <div class="aspect-[4/3] bg-white rounded-lg overflow-hidden shadow-sm mb-3 sm:mb-4">
                                                 <img src="${p.coverImage}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                                             </div>
